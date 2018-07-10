@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+        <a href="<%= root_url %>"/>Home</a>
+
+
+          <ul>
+            <li><%= link_to "Menu", meals_path %></li>
+            <% if current_user %>
+              <% if current_user.admin %>
+              <li><%= "ADMIN"  %></li>
+              <% end %>
+            <% end %>
+            <% if !logged_in? %>
+            <li><%=  link_to "Sign Up", new_user_path, method: 'get' %></l1>
+
+            <li><%=  link_to "Sign in", signin_path , method: 'get'%></li>
+              <% else %>
+
+            <li> <%= link_to "Log Out", logout_path , method: 'post'%> </li>
+            <% end %>
+
+            <% if current_user %>
+              <% if current_user.admin %>
+                    <%# binding.pry %>
+              <li><%= link_to "Add New Meal", new_meal_path %></li>
+              <% end %>
+            <% end %>
+
+          </ul>
+                <% if current_user %>
+                <% if current_user.orders %>
+                <%# link_to "Order:", orders_path %> <br>
+          <%= link_to "Order Total: #{number_to_currency(session[:total])}", orders_path %> 
+          <%# link_to "Check Out","#" %>
+              <% end %>
+              <% end %>
+
+
+
+
+
+
+      <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert alert-info" %>
+
+  <% end %>
+
+    <%= yield %>
+  </body>
+</html>

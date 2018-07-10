@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 1
+  meal_id: 1
+  date: 2018-07-07 09:21:52
+
+two:
+  customer_id: 1
+  meal_id: 1
+  date: 2018-07-07 09:21:52

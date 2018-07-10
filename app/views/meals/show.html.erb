@@ -1,0 +1,17 @@
+  <h1><%= @meal.name.capitalize %></h1>
+
+<h3><%= @meal.description %></h3>
+
+Price: <%= number_to_currency(@meal.price) %>  | <%= @meal.calorie_count %> Calories
+
+<% if current_user %>
+  <% if current_user.admin %>
+    <%= link_to "Edit", edit_meal_path(@meal)  %></td><br>
+  <% end %>
+<% end %>
+
+<br> <br>
+
+<%= link_to "Add to Order", add_meal_path %><br> <br>
+
+<%# button_to "Go on this ride", go_path, method: 'get' %>

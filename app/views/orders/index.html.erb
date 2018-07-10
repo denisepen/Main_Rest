@@ -1,0 +1,13 @@
+<% if current_user %>
+<%#  binding.pry %>
+<h1><%= current_user.first_name %> <%= current_user.last_name %>'s Order </h1>
+  <% if !current_user.orders.empty? %>
+<%   current_user.orders.each do |order| %>
+  <%=  order.meal.name   %> <%= number_to_currency(order.meal.price) %> <%= link_to "Delete", order, method: :delete %><br>
+
+  <% end %>
+  <h3>Total: <%= number_to_currency(session[:total]) %></h3>
+<% end %>
+
+<h3><%= link_to "Check Out", checkout_path %></h3>
+  <% end %>

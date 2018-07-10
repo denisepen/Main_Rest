@@ -1,0 +1,19 @@
+<h1>Menu</h1>
+<% if @meals %>
+<% @meals.each do |meal| %>
+    <h3><%= meal.name %> <%= "      " %>  <%= link_to "View", meal_path(meal)  %> </h3>
+    <h5><%= meal.description %></h5>
+    <h5><%= meal.calorie_count %> Calories |
+    <%= number_to_currency(meal.price) %></h5>
+
+
+    <% if current_user %>
+    <% if current_user.admin %>
+      <%= link_to "Delete", meal, method: :delete  %> | <%= link_to "Edit", edit_meal_path(meal)  %><br> <br>
+    <% else %>
+      <br> <br>
+      <% end %>
+
+<% end %>
+<% end %>
+<% end %>
