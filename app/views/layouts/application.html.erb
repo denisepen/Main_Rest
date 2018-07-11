@@ -38,10 +38,11 @@
             <% end %>
 
           </ul>
+                <%= hidden_field :trip_id, :value => session[:trip_id] %>
                 <% if current_user %>
                 <% if current_user.trips %>
                 <%# link_to "Order:", orders_path %> <br>
-          <%= link_to "Order Total: #{number_to_currency(session[:total])}", orders_path %> 
+          <%= link_to "Order Total: #{number_to_currency(session[:total])}", trip_path(session[:trip_id]) %>
           <%# link_to "Check Out","#" %>
               <% end %>
               <% end %>

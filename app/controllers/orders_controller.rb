@@ -31,7 +31,8 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.delete
-    redirect_to orders_path
+    session[:total] = Order.joins(:trip).joins(:meal).sum("price")
+    redirect_to trip_path(session[:trip_id])
 
   end
 

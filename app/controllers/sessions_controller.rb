@@ -12,8 +12,9 @@ class SessionsController < ApplicationController
      if @user
        if  @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-
-      redirect_to :root
+      session[:total] = 0
+      # binding.pry
+      redirect_to new_trip_path
       # user_path(@user)
     else
     flash[:error] = "Email or password is invalid"
@@ -27,8 +28,8 @@ class SessionsController < ApplicationController
     # session.delete :total
     # session.delete :order_id
     session[:user_id] = nil
-    session[:order_id] = nil
-    session[:total] = nil
+    session[:trip_id] = nil
+    session[:total] = 0
 
     # reset_session
     redirect_to root_path
