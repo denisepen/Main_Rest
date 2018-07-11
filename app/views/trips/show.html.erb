@@ -1,0 +1,6 @@
+<h1>Summary of Trip <%= @trip.id %></h1>
+
+<% @trip.orders.each do |order| %>
+<%= order.meal.name %>
+<%= order.meal.price %>
+<% end %>
