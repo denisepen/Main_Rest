@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :user
+  belongs_to :trip
   belongs_to :meal
 
   def add_to_order
