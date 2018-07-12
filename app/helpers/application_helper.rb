@@ -14,7 +14,7 @@ module ApplicationHelper
  end
 
    def is_admin?
-     if current_user.admin == true
+     if current_user.admin  #== true
        true
      else
        false

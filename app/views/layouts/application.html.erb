@@ -25,7 +25,11 @@
             <li><%=  link_to "Sign Up", new_user_path, method: 'get' %></l1>
 
             <li><%=  link_to "Sign in", signin_path , method: 'get'%></li>
+
+            <li><%= link_to('Log in with Facebook!', '/auth/facebook') %></li>
               <% else %>
+              <h1><%= current_user.name %></h1>
+              <h2>Email: <%= current_user.email %></h2>
 
             <li> <%= link_to "Log Out", logout_path , method: 'post'%> </li>
             <% end %>

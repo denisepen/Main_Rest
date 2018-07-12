@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :meals
   resources :orders
   resources :ingredients
+  get '/auth/facebook/callback' => 'sessions#create'
 
   get '/signin', to: 'sessions#signin'
   post '/signin', to: 'sessions#create'

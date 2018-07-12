@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if current_user.admin == true
+    if is_admin?
     @user = User.find(params[:id])
     render 'edit'
   else
@@ -37,8 +37,11 @@ end
   end
 
   def show
-    # puts params[:id]
+    if is_admin?
      @user = User.find(params[:id])
+   else
+     redirect_to meals_path
+   end
   end
 
   def order_page
