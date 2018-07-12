@@ -6,19 +6,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # binding.pry
+
     @user = User.find_by(email: params[:user][:email])
-    # binding.pry
      if @user
        if  @user.authenticate(params[:user][:password])
+
       session[:user_id] = @user.id
       session[:total] = 0
-      # binding.pry
+       # binding.pry
       redirect_to new_trip_path
-      # user_path(@user)
     else
-    flash[:error] = "Email or password is invalid"
-    render :signin
+       # binding.pry
+    flash[:notice] = "Email or password is invalid"
+    redirect_to :signin
     end
    end
   end

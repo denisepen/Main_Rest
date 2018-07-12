@@ -12,6 +12,10 @@ class Order < ApplicationRecord
     return "Meal added to Order"
   end
 
+  # def self.total
+  #   joins(:trip).joins(:meal).sum("price")
+  # end
+
 
 
   def order_total

@@ -21,7 +21,7 @@ class TripsController < ApplicationController
   end
 
   def index
-    # @trips =
+     @trips = Trip.all
   end
 
   def show

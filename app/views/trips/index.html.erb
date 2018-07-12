@@ -1,0 +1,25 @@
+  <h1>Order History</h1>
+<%# @trips.each do |trip|%>
+<%# trip.date.strftime("%m/%d/%y, %l:%M %p") %>
+<%# trip.user.first_name %>
+<%# trip.total %>
+<%# trip.meals.each do |meal| %>
+<%# meal.name %>
+<%#  meal.price %> <br>
+<%# end %>
+<%# end %>
+
+<table style="width:75%">
+  <tr>
+    <th>Date</th>
+    <th>Name</th>
+    <th>Order Total</th>
+  </tr>
+  <tr>
+    <% @trips.each do |trip|%>
+    <td><%= trip.date.strftime("%m/%d/%y, %l:%M %p") %></td>
+    <td><%= trip.user.first_name %>  <%= link_to trip.user.last_name, user_path(trip.user) %></td>
+    <td>$$$</td>
+  </tr>
+  < <% end %>
+</table>
