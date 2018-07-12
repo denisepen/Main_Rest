@@ -20,5 +20,5 @@ Rails.application.routes.draw do
    get '/add_meal', to: 'orders#add_meal'
   # get '/add_meal', to: 'trips#add_meal'
   # get '/order_page', to: 'users#order_page'
-  get'/checkout', to: 'orders#checkout'
+  get'/checkout', to: 'trips#checkout'
 end

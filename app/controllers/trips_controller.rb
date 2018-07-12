@@ -29,13 +29,13 @@ class TripsController < ApplicationController
     session[:total] = Order.joins(:trip).where(trip_id: session[:trip_id]).joins(:meal).sum("price")
   end
 
-  def total
-    # binding
-    @user = Order.find_by(id: session[:user_id])
-    @trip_total = Trip.joins(:orders).joins(:meals).sum("price")
-    binding.pry
-    @trip_total = session[:total]
-  end
+  # def total
+  #   # binding
+  #   @user = Order.find_by(id: session[:user_id])
+  #   @trip_total = Trip.joins(:orders).joins(:meals).sum("price")
+  #   binding.pry
+  #   @trip_total = session[:total]
+  # end
 
   def update
     @trip = Trip.find_by(id: session[:trip_id])
