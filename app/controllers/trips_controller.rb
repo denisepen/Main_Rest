@@ -6,18 +6,7 @@ class TripsController < ApplicationController
 
      # session[:total] = Order.joins(:trip).joins(:meal).sum("price")
       redirect_to :root
-     # raise session.inspect
-     # binding.pry
-  # raise params.inspect
-    # @order = Order.create(meal_id: session[:meal_id], user_id: session[:user_id], date: Time.now)
-    # @order = Order.create(meal_id: session[:meal_id], trip_id: session[:trip_id], date: Time.now)
-
-    # binding.pry
-    # @order.id = session[:order_id]
-    # raise session.inspect
-    # flash[:notice] = "Meal added to Order"
-
-    # redirect_to trip_path(@trip)
+    
   end
 
   def index

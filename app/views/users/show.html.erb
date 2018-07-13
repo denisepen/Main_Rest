@@ -9,12 +9,12 @@
 <%# if trip.meals %>
   <%= link_to "Order No. #{trip.id}", trip_path(trip) if !trip.meals.empty?%> <br>
   <%= "Date: #{trip.date.strftime("%m/%d/%y, %l:%M %p")}"  if !trip.meals.empty?%> <br>
-
+  <%= "Total:  #{trip.total}" if !trip.meals.empty? %>
   <% trip.meals.each do |meal| %>
   Meal: <%= meal.name %> <br>
   Price: <%= meal.price %> <br>
   <% end %>
-  <%= "Total: $$$$$$$$" if !trip.meals.empty? %> <br> <br>
+   <br> <br>
 <% end %>
 
 <br> <br>

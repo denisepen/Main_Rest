@@ -39,6 +39,7 @@ end
   def show
     if is_admin?
      @user = User.find(params[:id])
+     @order_total = @user.joins(:trip).where(trip_id: trip.id).joins(:meal).sum("price")
    else
      redirect_to meals_path
    end

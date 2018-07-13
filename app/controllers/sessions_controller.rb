@@ -6,33 +6,38 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_or_create_by(uid: auth['uid']) do |u|
-      u.name = auth['info']['name']
-      u.email = auth['info']['email']
-       u.image = auth['info']['image']
-    end
-     # binding.pry
-   session[:user_id] = @user.id
-   redirect_to new_trip_path
-  end
+    if auth
+        @user = User.find_or_create_by(uid: auth['uid']) do |u|
+          u.name = auth['info']['name']
+          u.email = auth['info']['email']
+           u.image = auth['info']['image']
+        end
+         # binding.pry
+         @user.save(validate: false)
+       session[:user_id] = @user.id
+       redirect_to new_trip_path
+    else
 
 
 
     ### commented out to make room for facebook authentication
-   #  @user = User.find_by(email: params[:user][:email])
-   #   if @user
-   #     if  @user.authenticate(params[:user][:password])
-   #
-   #    session[:user_id] = @user.id
-   #    session[:total] = 0
-   #     # binding.pry
-   #    redirect_to new_trip_path
-   #  else
-   #     # binding.pry
-   #  flash[:notice] = "Email or password is invalid"
-   #  redirect_to :signin
-   #  end
-   # end
+    @user = User.find_by(email: params[:user][:email])
+     if @user
+       # binding.pry
+       if  @user.authenticate(params[:user][:password])
+
+      session[:user_id] = @user.id
+      session[:total] = 0
+       # binding.pry
+      redirect_to new_trip_path
+    else
+       # binding.pry
+    flash[:notice] = "Email or password is invalid"
+    redirect_to :signin
+    end
+   end
+ end
+ end
 
 
   def destroy
