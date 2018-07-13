@@ -1,8 +1,12 @@
 <% if current_user %>
 <%#  binding.pry %>
+<% if current_user.first_name %>
 <h1><%= current_user.first_name %> <%= current_user.last_name %>'s Order </h1>
+<% else%>
+<h1><%= current_user.name %>'s Order </h1>
+<% end %>
 <% if @trip %>
-<h1>Summary of Trip #<%= @trip.id %></h1>
+<h1>Summary of Order No. <%= @trip.id %></h1>
 
 <% @trip.orders.each do |order| %>
 <%= order.meal.name %>

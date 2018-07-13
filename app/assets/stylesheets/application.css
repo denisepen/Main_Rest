@@ -8,20 +8,80 @@ div.alert{
   display: table;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-
+body{
+  margin; 0;
+  font-weight: 400;
+  background: #9b9fa5;
+  /* color: #444; */
 }
 
-li, .home {
+header{
+  background-color: #23a1af;
+}
+
+header::after{
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo{
   float: left;
+  padding: 10px 0;
 }
 
+.container{
+  width: 90%;
+  margin: 0, auto;
+}
 
- a:link, a:visited {
-  display: block;
+nav{
+  float:right;
+}
+
+nav ul{
+  margin: 25px, 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li{
+  display: inline-block;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+nav a{
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav a:hover, a:active{
+  color: black;
+}
+
+h1{
+  /* float: left; */
+  align: center;
+}
+
+ /* a:link, a:visited, .nav { */
+  /* display: block; */
+  /* width: 100px; */
+  /* background-color: #d2d5db;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px; */
+
+/* } */
+
+
+
+/* .home{
   width: 100px;
   background-color: blue;
   color: white;
@@ -30,15 +90,4 @@ li, .home {
   font-weight: bold;
   text-transform: uppercase;
   padding: 5px;
-}
-
-.home{
-  width: 100px;
-  background-color: blue;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 5px;
-}
+} */

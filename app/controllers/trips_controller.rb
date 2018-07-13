@@ -1,12 +1,13 @@
 class TripsController < ApplicationController
-
+  after_action :trip_complete, only: [:checkout]
   def new
     @trip = Trip.create!(user_id: session[:user_id], date: Time.now)
      session[:trip_id] = @trip.id
+     # binding.pry
 
      # session[:total] = Order.joins(:trip).joins(:meal).sum("price")
       redirect_to :root
-    
+
   end
 
   def index
@@ -34,6 +35,11 @@ class TripsController < ApplicationController
 
   def checkout
     render :checkout
+  end
+
+  def trip_complete
+    session[:total] = 0
+    session.clear
   end
 
   private
