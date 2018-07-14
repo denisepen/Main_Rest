@@ -6,15 +6,17 @@
     <title>Restaurant</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <div class="container">
         <%# image_tag "food_logo.png", class: "logo" %>
+        <div class="logo">
+          <a href="#">denise</a>
+        </div>
         <nav>
           <ul>
             <li><a  href="<%= root_url %>"/>Home</a></li>
@@ -60,5 +62,11 @@
     <% end %>
 
     <%= yield %>
+
+    <div class="social-links">
+      <a href="#"><i class="fa fa-instagram"></i></a>
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+    </div>
   </body>
 </html>
