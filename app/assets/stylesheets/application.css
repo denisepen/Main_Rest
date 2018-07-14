@@ -28,11 +28,11 @@ div.alert{
   display: table;
 }
 
-header::after {
+/* header::after {
   content: '';
   display: table;
   clear: both;
-}
+} */
 
 /* .logo {
   float: left;
