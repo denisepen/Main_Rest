@@ -1,22 +1,21 @@
-<% if @user.first_name%>
+<%# if @user.first_name%>
 
-<h1>Account Information: <%= @user.first_name %> <%= @user.last_name %></h1>
-<% else %>
-<h1>Account Information: <%= @user.name %></h1>
-<% end %>
-<h3>Email: <%= current_user.email %></h3>
+<h1>Account Information: <%= @user.named %>
+
+<h3>Email: <%= @user.email %></h3>
 
 <h4>Orders:</h4> <br>
 
 
 <% @user.trips.each do |trip| %>
-<%# if trip.meals %>
-  <%= link_to "Order No. #{trip.id}", trip_path(trip) if !trip.meals.empty?%> <br>
+<% if !trip.meals.empty? %>
+  <%= "Order No. #{trip.id}"%> <br>
   <%= "Date: #{trip.date.strftime("%m/%d/%y, %l:%M %p")}"  if !trip.meals.empty?%> <br>
-  <%= "Total:  #{trip.total}" if !trip.meals.empty? %>
+  <%= "Total:  #{trip.total}" if !trip.meals.empty? %> <br>
   <% trip.meals.each do |meal| %>
   Meal: <%= meal.name %> <br>
   Price: <%= meal.price %> <br>
+  <% end %>
   <% end %>
    <br> <br>
 <% end %>

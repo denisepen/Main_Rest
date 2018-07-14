@@ -1,18 +1,20 @@
 <% if current_user %>
 <%#  binding.pry %>
-<% if current_user.first_name %>
-<h1><%= current_user.first_name %> <%= current_user.last_name %>'s Order </h1>
-<% else%>
-<h1><%= current_user.name %>'s Order </h1>
-<% end %>
+<%# if current_user.first_name %>
+<!-- <h1><%#current_user.first_name %> <%# current_user.last_name %>'s Order </h1> -->
+<%# else%>
+<h1><%= current_user.named %>'s Order </h1>
+<%# end %>
 <% if @trip %>
 <h1>Summary of Order No. <%= @trip.id %></h1>
-
 <% @trip.orders.each do |order| %>
 <%= order.meal.name %>
-<%= number_to_currency(order.meal.price) %> <%= link_to "Delete", order, method: :delete %> <br>
+<%= number_to_currency(order.meal.price) %>
+
+<%= link_to "Delete", order, method: :delete  %> <br>
+
 <% end %>
-<h3>Total: <%= number_to_currency(session[:total]) %></h3>
+<h3>Total: <%= number_to_currency(@trip.total) %></h3>
 <% end %>
 
 <h3><%= link_to "Check Out", checkout_path %></h3>

@@ -1,23 +1,37 @@
 class TripsController < ApplicationController
   after_action :trip_complete, only: [:checkout]
+
   def new
     @trip = Trip.create!(user_id: session[:user_id], date: Time.now)
      session[:trip_id] = @trip.id
-     # binding.pry
-
-     # session[:total] = Order.joins(:trip).joins(:meal).sum("price")
       redirect_to :root
 
   end
 
   def index
+
+    if is_admin?
      @trips = Trip.all
+     # binding.pry
+   elsif current_user
+     @trips = current_user.trips
+     # @trip_total = @trip.
+   else
+     redirect_to root_path
+   end
   end
 
   def show
+    trip = Trip.find_by(id: params[:id])
+    if trip.id == session[:trip_id]
     @trip = Trip.find(session[:trip_id])
     session[:total] = Order.joins(:trip).where(trip_id: session[:trip_id]).joins(:meal).sum("price")
+    # binding.pry
+  else
+    @trip = Trip.find_by(id: params[:id])
+    @trip_total = trip.total
   end
+end
 
   # def total
   #   # binding

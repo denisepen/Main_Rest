@@ -38,24 +38,20 @@
               <% end %>
 
                   <% if current_user %>
-                <% if current_user.name %>
-              <li class='nav'><%= current_user.name %></li>
+
+              <li class='nav'><%= current_user.named %></li>
               <% end %>
               <!-- <h2>Email: <%# current_user.email %></h2> -->
 
-              <% if current_user.first_name %>
-              <li class='nav'><%= current_user.first_name %> <%= current_user.last_name %></li>
-                <% end %>
-              <% end %>
 
 
-                <%= hidden_field :trip_id, :value => session[:trip_id] %>
+
+                <%# hidden_field :trip_id, :value => session[:trip_id] %>
                 <% if current_user %>
                 <% if current_user.trips %>
-                <%# link_to "Order:", orders_path %>
-                <% hidden_field :trip_id, :value => session[:trip_id] %>
-        <li><%= link_to "Total: #{number_to_currency(session[:total])}", trip_path(session[:trip_id]) %></li>
-          <%# link_to "Check Out","#" %>
+                <%# hidden_field :trip_id, :value => session[:trip_id] %>
+        <li><%= link_to "Total: #{number_to_currency(session[:total])}", trip_path(session[:trip_id]) if session[:trip_id] %></li>
+
               <% end %>
               <% end %>
               <% if current_user %>
