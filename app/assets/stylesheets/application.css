@@ -1,3 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+}
+
+body{
+  font-weight: 400;
+  /* background: #9b9fa5; */
+  /* color: #444; */
+}
+
+header{
+  width: inherit;
+  background-color: #23a1af;
+}
+
 div.alert{
   background-color: red;
 }
@@ -8,35 +28,24 @@ div.alert{
   display: table;
 }
 
-body{
-  margin; 0;
-  font-weight: 400;
-  background: #9b9fa5;
-  /* color: #444; */
-}
-
-header{
-  background-color: #23a1af;
-}
-
-header::after{
+header::after {
   content: '';
   display: table;
   clear: both;
 }
 
-.logo{
+/* .logo {
   float: left;
   padding: 10px 0;
-}
+} */
 
-.container{
+.container {
   width: 90%;
-  margin: 0, auto;
+  margin: 0 auto;
 }
 
-nav{
-  float:right;
+nav {
+  float: right;
 }
 
 nav ul{

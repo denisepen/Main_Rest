@@ -1,0 +1,17 @@
+Review Form
+
+<%= form_for @review do |f| %>
+
+<%= f.label :title %>
+<%= f.text_field :title %><br>
+
+<%= f.label :comment %>
+<%= f.text_area :comment %> <br>
+<%= f.label :date_posted %>
+<%= f.date_field :date_posted %> <br>
+
+
+<%# f.label "Ingredient" %>
+
+<%= f.submit  %>
+<% end %>

@@ -29,15 +29,7 @@ class OrdersController < ApplicationController
     session[:total] = total
     # session[:total] = Order.joins(:trip).joins(:meal).sum("price")
     redirect_to trip_path(session[:trip_id])
-
   end
-
-  # def total
-  #   # binding
-  #   @user = Order.find_by(id: session[:user_id])
-  #   @order_total = Order.joins(:user).joins(:meal).sum("price")
-  #   @order_total = session[:total]
-  # end
 
   def checkout
     render :checkout

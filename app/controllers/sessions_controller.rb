@@ -17,18 +17,12 @@ class SessionsController < ApplicationController
        session[:user_id] = @user.id
        redirect_to new_trip_path
     else
-
-
-
-    ### commented out to make room for facebook authentication
     @user = User.find_by(email: params[:user][:email])
      if @user
-       # binding.pry
        if  @user.authenticate(params[:user][:password])
 
       session[:user_id] = @user.id
       session[:total] = 0
-       # binding.pry
       redirect_to new_trip_path
     else
        # binding.pry

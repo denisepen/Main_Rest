@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Restaurant</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,70 +12,52 @@
   </head>
 
   <body>
-<header>
-  <div class="container">
-
-    <%= image_tag "food_logo.png", class: "logo" %>
+    <header>
+      <div class="container">
+        <%# image_tag "food_logo.png", class: "logo" %>
         <nav>
           <ul>
             <li><a  href="<%= root_url %>"/>Home</a></li>
             <li><%= link_to "Menu", meals_path%></li>
             <% if current_user %>
               <% if current_user.admin %>
-              <li class='nav'><%= "ADMIN"  %></li>
+                <li class='nav'><%= "ADMIN"  %></li>
               <% end %>
             <% end %>
+
             <% if !logged_in? %>
-            <li><%=  link_to "Sign Up", new_user_path, method: 'get' %></l1>
+              <li><%=  link_to "Sign Up", new_user_path, method: 'get' %></l1>
+              <li><%=  link_to "Sign in", signin_path , method: 'get'%></li>
+              <li><%= link_to('Log in with Facebook!', '/auth/facebook') %></li>
+            <% else %>
+              <li> <%= link_to "Log Out", logout_path , method: 'post'%> </li>
+            <% end %>
 
-            <li><%=  link_to "Sign in", signin_path , method: 'get'%></li>
-
-            <li><%= link_to('Log in with Facebook!', '/auth/facebook') %></li>
-
-                <% else %>
-            <li> <%= link_to "Log Out", logout_path , method: 'post'%> </li>
-              <% end %>
-
-                  <% if current_user %>
-
+            <% if current_user %>
               <li class='nav'><%= current_user.named %></li>
-              <% end %>
-              <!-- <h2>Email: <%# current_user.email %></h2> -->
+            <% end %>
 
-
-
-
+            <% if current_user %>
+              <% if current_user.trips %>
                 <%# hidden_field :trip_id, :value => session[:trip_id] %>
-                <% if current_user %>
-                <% if current_user.trips %>
-                <%# hidden_field :trip_id, :value => session[:trip_id] %>
-        <li><%= link_to "Total: #{number_to_currency(session[:total])}", trip_path(session[:trip_id]) if session[:trip_id] %></li>
+                <li><%= link_to "Total: #{number_to_currency(session[:total])}", trip_path(session[:trip_id]) if session[:trip_id] %></li>
+              <% end %>
+            <% end %>
 
-              <% end %>
-              <% end %>
-              <% if current_user %>
-                <% if current_user.admin %>
-                      <%# binding.pry %>
+            <% if current_user %>
+              <% if current_user.admin %>
                 <li><%= link_to "Add New Meal", new_meal_path %></li>
                 <li><%= link_to "Customer Orders", trips_path %></li>
-                <% end %>
               <% end %>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-            </ul>
-            </nav>
-          </div>
-      </header>
-             <br><br>
-
-
-
-
-
-
-      <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, class: "alert alert-info" %>
-
-  <% end %> <br><br>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
 
     <%= yield %>
   </body>
