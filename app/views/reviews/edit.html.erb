@@ -1,7 +1,5 @@
-<!-- Review Form -->
-
 <%= form_for @review do |f| %>
-<p class="form-title">Write A Review</p>
+<p class="form-title">Edit Your Review</p>
 <%= f.label :title %>
 <%= f.text_field :title %><br>
 
@@ -11,4 +9,3 @@
 <%= f.date_field :date_posted %> <br>
 
 <%= f.submit  %>
-<% end %>

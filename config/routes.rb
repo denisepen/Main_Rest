@@ -6,8 +6,13 @@ Rails.application.routes.draw do
   root :to => "application#home"
 
    resources :users, only: [:new, :show] do
-  #   # nested resource for orders
+    # nested resource for trips
     resources :trips, only: [:show, :index]
+   end
+
+   resources :users, only: [:new, :show] do
+    # nested resource for reviews
+    resources :reviews, only: [:new, :index]
    end
   resources :users #, except: :show
   resources :meals

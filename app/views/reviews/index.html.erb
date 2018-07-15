@@ -1,0 +1,8 @@
+<h1>reviews</h1>
+  <% if @reviews %>
+<% @reviews.each do |review|%>
+  <h3><%= review.title%></h3>
+  <p><%= review.comment%></p>
+  <p><%= review.date_posted%></p>
+  <p><%= review.user.named%></p>
+<% end %>
