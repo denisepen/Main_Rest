@@ -97,6 +97,17 @@ form {
   background-color: #eee;
 }
 
+/* below is to dry up for the inputs and
+  text areas  - instead of repeating in
+    2 places */
+/* form .form-field {
+  width: 95%;
+  margin-bottom: 12px;
+  padding: 7px 5px;
+  font-size: 16px;
+  border: none;
+} */
+
 form p.form-title  {
   margin-bottom: 30px;
   text-align: center;
