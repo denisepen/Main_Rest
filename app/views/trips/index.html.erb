@@ -1,20 +1,17 @@
-  <h1>Order History</h1>
-  
-<table style="width:75%">
+<h1>Order History</h1>
+<table style="width: 75%;">
   <tr>
-    <th>Date</th>
-    <th>Name</th>
-    <th>Order Total</th>
+    <th style="text-align: left;">Date</th>
+    <th style="text-align: left;">Name</th>
+    <th style="text-align: left;">Order Total</th>
   </tr>
-  <tr>
-
-    <% @trips.each do |trip|%>
-    <% if trip.user%>
-    <td><%=  trip.date.strftime("%m/%d/%y, %l:%M %p") %></td>
-
-    <td><%= link_to trip.user.named, user_path(trip.user) %></td>
-    <td><%= number_to_currency(trip.total) %></td>
-  </tr>
-  < <% end %>
+  <% @trips.each do |trip|%>
+    <tr>
+      <% if trip.user%>
+        <td><%=  trip.date.strftime("%m/%d/%y, %l:%M %p") %></td>
+        <td><%= link_to trip.user.named, user_path(trip.user) %></td>
+        <td><%= number_to_currency(trip.total) %></td>
+      <% end %>
+    </tr>
   <% end %>
 </table>
