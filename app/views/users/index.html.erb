@@ -2,16 +2,16 @@
 
 <% @users.each do |c| %>
     <% if !c.admin %>
-  Name: <%= c.first_name  %> <%= c.last_name %> <br>
+  Name: <%= c.named %> <br>
 
   Email: <%= c.email %> <br>
-  <%# if c.orders %>
+  <%if c.orders %>
   <%# binding.pry %>
   Orders: <br>
   <% c.orders.each do |order| %>
     Date: <%= link_to order.date, user_order_path(c.id, order.id)  %> <br>
     <%# order.comment %>
-    <%# end %>
+    <% end %>
     <% end %>
     <hr>
     <% end %>

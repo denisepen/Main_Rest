@@ -1,0 +1,6 @@
+<h1>Review No. <%= @review.id%> </h1> <br>
+<p>Date: <%= @review.date_posted %></p>
+<h2><%= @review.title%></h2>
+<h3><%= @review.comment %></h3> <br> <br>
+
+<h3><%= link_to "Create A New Review", new_user_review_path(@review.user)  %></h3>

@@ -144,7 +144,7 @@ form textarea {
   display: block;
   resize: none;
 }
-/* div.alert{
+div.alert{
   background-color: red;
 }
 
@@ -152,7 +152,7 @@ form textarea {
   padding: 2px;
   background-color: red;
   display: table;
-} */
+}
 
 /* header::after {
   content: '';

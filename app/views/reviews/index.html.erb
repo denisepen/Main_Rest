@@ -1,8 +1,13 @@
 <h1>reviews</h1>
+<!-- <h2><%# link_to "Write A Review", new_user_review_path(current_user) %></h2> -->
+<br>
   <% if @reviews %>
 <% @reviews.each do |review|%>
-  <h3><%= review.title%></h3>
-  <p><%= review.comment%></p>
-  <p><%= review.date_posted%></p>
-  <p><%= review.user.named%></p>
+  <h3><%= link_to review.title, review_path(review) %></h3>
+  <p><%= review.comment %></p>
+  <p>Date: <%= review.date_posted %></p>
+  <p>by: <%= link_to review.user.named, user_reviews_path(review.user) %></p> <br><br>
 <% end %>
+
+<% end %>
+<h3><%= link_to "Create A New Review", new_user_review_path(current_user)  %></h3>
