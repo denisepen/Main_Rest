@@ -9,6 +9,7 @@ class TripsController < ApplicationController
   end
 
   def index
+  
     @sum_of_totals = 0
     if is_admin?
      @trips = Trip.all

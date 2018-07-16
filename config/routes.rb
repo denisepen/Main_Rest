@@ -10,9 +10,10 @@ Rails.application.routes.draw do
     resources :trips, only: [:show, :index]
    end
 
-   resources :users, only: [:new, :show] do
+
     # nested resource for reviews
-    resources :reviews, only: [:new, :edit, :show, :index]
+    resources :users, only: [:new, :show] do
+      resources :reviews, only: [:new, :edit, :show, :index]
    end
   resources :users #, except: :show
   resources :meals

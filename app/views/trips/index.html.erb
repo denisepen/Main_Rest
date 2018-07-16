@@ -1,6 +1,5 @@
 <h1>Order History</h1>
 
-<%# sum_of_totals = 0 %>
 <table style="width: 75%;">
   <tr>
     <th style="text-align: left;">Date</th>
@@ -19,6 +18,6 @@
     </tr>
   <% end %>
 
-  Total: <%# Trip.admin_total %><%= @sum_of_totals %>
+   <h2>Sum Total: <%# Trip.admin_total %><%= number_to_currency(@sum_of_totals) %></h2>
 
 </table>

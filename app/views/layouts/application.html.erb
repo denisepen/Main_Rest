@@ -33,7 +33,7 @@
               <li><%=  link_to "sign up", new_user_path, method: 'get' %></li>
               <li><%=  link_to "sign in", signin_path , method: 'get'%></li>
               <!-- <li><a href="#">get started</a></li><!-- TODO: Make erb handle this -->
-              <li><%= link_to('Log in with Facebook!', '/auth/facebook') %></li>
+              <li><%= link_to('Log in with Facebook', '/auth/facebook') %></li>
             <% else %>
               <li> <%= link_to "Log Out", logout_path , method: 'post'%> </li>
             <% end %>

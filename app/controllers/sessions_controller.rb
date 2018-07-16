@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
           u.email = auth['info']['email']
            u.image = auth['info']['image']
         end
-         # binding.pry
          @user.save(validate: false)
        session[:user_id] = @user.id
        redirect_to new_trip_path
@@ -38,12 +37,10 @@ class SessionsController < ApplicationController
     # session[:trip_id] = nil
     session[:total] = 0
     @trip = Trip.find_by(id: session[:trip_id])
+    # binding.pry
     if @trip.status = "new"
-      # @trip = Trip.find_by(id: session[:trip_id])
       @trip.delete
     end
-
-    # reset_session
     redirect_to root_path
   end
 

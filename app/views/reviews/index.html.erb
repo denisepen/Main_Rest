@@ -1,13 +1,16 @@
 <h1>reviews</h1>
+<h3>Sign In to Leave A Review</h3>
+
 <!-- <h2><%# link_to "Write A Review", new_user_review_path(current_user) %></h2> -->
 <br>
   <% if @reviews %>
 <% @reviews.each do |review|%>
-  <h3 ><%= link_to review.title, review_path(review) %>  <%= link_to "| Edit Review", edit_user_review_path(review.user, review) if logged_in? %>  <%=  link_to " | Delete", review, method: :delete if logged_in? %> </h3>
+
+  <h3 ><%= link_to review.title, user_review_path(review.user, review) %>  <%= link_to "| Edit Review", edit_user_review_path(review.user, review) if logged_in? %>  <%=  link_to " | Delete", review, method: :delete if logged_in? %> </h3>
   <p><%= review.comment %></p>
   <p>Date: <%= (review.date_posted).strftime("%b %d, %Y") %></p>
   <p>by: <%= link_to review.user.named, user_reviews_path(review.user) %></p> <br><br>
 <% end %>
 
 <% end %>
-<h3><%= link_to "Create A New Review", new_user_review_path(current_user) if current_user %></h3>
+<h3><%= link_to "Create A New Review", new_user_review_path(current_user) if current_user  %></h3>
