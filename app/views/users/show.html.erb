@@ -2,21 +2,23 @@
 
 <h1>Account Information: <%= @user.named %>
 
-<h3>Email: <%= @user.email %></h3>
+<h3>Email: <%= @user.email %> <%= link_to "| Edit Account", edit_user_path(@user)  %></h3><br>
 
-<h4>Orders:</h4> <br>
+<h4>Orders:</h4>
 
 
 <% @user.trips.each do |trip| %>
 <% if !trip.meals.empty? %>
   <%= "Order No. #{trip.id}"%> |
   <%= "Date: #{trip.date.strftime("%m/%d/%y, %l:%M %p")}"  if !trip.meals.empty?%> <br>
-  <%= "Total:  #{number_to_currency(trip.total)}" if !trip.meals.empty? %> <br> <br>
+
   <% trip.meals.each do |meal| %>
   Meal: <%= meal.name %> <br>
   Price: <%= number_to_currency(meal.price) %> <br>
   <% end %>
   <% end %>
+
+   <%= "Order Total:  #{number_to_currency(trip.total)}" if !trip.meals.empty? %>
    <br> <br>
 <% end %>
 

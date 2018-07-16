@@ -17,7 +17,7 @@
       <div class="container">
         <%# image_tag "food_logo.png", class: "logo" %>
         <div class="logo">
-          <a href="<%= root_url %>">denise</a>
+          <a href="<%= root_url %>">chez denise</a>
         </div>
         <nav>
           <ul>
@@ -30,9 +30,9 @@
             <% end %>
 
             <% if !logged_in? %>
-              <!-- <li><%=  link_to "sign up", new_user_path, method: 'get' %></li> -->
+              <li><%=  link_to "sign up", new_user_path, method: 'get' %></li>
               <li><%=  link_to "sign in", signin_path , method: 'get'%></li>
-              <li><a href="#">get started</a></li><!-- TODO: Make erb handle this -->
+              <!-- <li><a href="#">get started</a></li><!-- TODO: Make erb handle this -->
               <li><%= link_to('Log in with Facebook!', '/auth/facebook') %></li>
             <% else %>
               <li> <%= link_to "Log Out", logout_path , method: 'post'%> </li>

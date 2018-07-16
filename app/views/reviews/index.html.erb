@@ -3,7 +3,7 @@
 <br>
   <% if @reviews %>
 <% @reviews.each do |review|%>
-  <h3 ><%= link_to review.title, review_path(review) %> | <%= link_to "Edit Review", edit_user_review_path(review.user, review)  %> | <%= link_to "Delete", review, method: :delete  %> </h3>
+  <h3 ><%= link_to review.title, review_path(review) %>  <%= link_to "| Edit Review", edit_user_review_path(review.user, review) if logged_in? %>  <%=  link_to " | Delete", review, method: :delete if logged_in? %> </h3>
   <p><%= review.comment %></p>
   <p>Date: <%= (review.date_posted).strftime("%b %d, %Y") %></p>
   <p>by: <%= link_to review.user.named, user_reviews_path(review.user) %></p> <br><br>

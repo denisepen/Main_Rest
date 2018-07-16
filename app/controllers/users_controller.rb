@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if is_admin?
+    if !is_admin?
     @user = User.find(params[:id])
     render 'edit'
   else
