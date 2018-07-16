@@ -4,13 +4,15 @@ class TripsController < ApplicationController
   def new
     @trip = Trip.create!(user_id: session[:user_id], date: Time.now)
      session[:trip_id] = @trip.id
+     session[:total] = @trip.total
       redirect_to :root
   end
 
   def index
+    @sum_of_totals = 0
     if is_admin?
      @trips = Trip.all
-   elsif current_usernew.html.erb
+   elsif current_user
      @trips = current_user.trips
    else
      redirect_to root_path
@@ -21,6 +23,7 @@ class TripsController < ApplicationController
     trip = Trip.find_by(id: params[:id])
     if trip.id == session[:trip_id]
     @trip = Trip.find(session[:trip_id])
+    session[:total] = @trip.total
     # session[:total] = Order.joins(:trip).where(trip_id: session[:trip_id]).joins(:meal).sum("price")
     # binding.pry
   else

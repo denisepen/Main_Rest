@@ -1,4 +1,4 @@
-<h1>Thanks For Your Order <%= current_user.first_name %>!</h1>
+<h1>Thanks For Your Order <%= current_user.named %>!</h1>
 
 <h3>Your order total is <%= number_to_currency(session[:total]) %></h3>
 

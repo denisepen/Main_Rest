@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
    resources :users, only: [:new, :show] do
     # nested resource for reviews
-    resources :reviews, only: [:new, :show, :index]
+    resources :reviews, only: [:new, :edit, :show, :index]
    end
   resources :users #, except: :show
   resources :meals

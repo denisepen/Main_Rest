@@ -39,7 +39,7 @@
             <% end %>
 
             <% if current_user %>
-              <li class='nav'><%= current_user.named %></li>
+              <li class='nav'><%= link_to current_user.named, user_path(current_user) %></li>
             <% end %>
 
             <% if current_user %>

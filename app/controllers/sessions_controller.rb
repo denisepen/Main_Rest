@@ -18,26 +18,30 @@ class SessionsController < ApplicationController
        redirect_to new_trip_path
     else
     @user = User.find_by(email: params[:user][:email])
-     if @user
-       if  @user.authenticate(params[:user][:password])
+     if @user &&
+         @user.authenticate(params[:user][:password])
 
       session[:user_id] = @user.id
-      session[:total] = 0
+      # session[:total] = 0
       redirect_to new_trip_path
     else
-       # binding.pry
     flash[:notice] = "Email or password is invalid"
-    redirect_to :signin
+    redirect_to signin_path
     end
    end
- end
+
  end
 
 
   def destroy
     session[:user_id] = nil
-    session[:trip_id] = nil
+    # session[:trip_id] = nil
     session[:total] = 0
+    @trip = Trip.find_by(id: session[:trip_id])
+    if @trip.status = "new"
+      # @trip = Trip.find_by(id: session[:trip_id])
+      @trip.delete
+    end
 
     # reset_session
     redirect_to root_path

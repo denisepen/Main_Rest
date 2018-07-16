@@ -1,5 +1,23 @@
 <!-- Review Form -->
 
+<% if @review.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@review.errors.count, "error") %>
+      prohibited this review from being saved:
+    </h2>
+
+    <ul>
+    <% @review.errors.full_messages.each do |msg| %>
+    <% if @review.errors.any? %>
+    <li><%= msg %></li>
+    <% end %>
+    </ul>
+
+    </div>
+    <% end %>
+    <% end %>
+
 <%= form_for @review do |f| %>
 <p class="form-title">Write A Review</p>
 <%= f.label :title %>
@@ -9,6 +27,9 @@
 <%= f.text_area :comment %> <br>
 <%= f.label :date_posted %>
 <%= f.date_field :date_posted %> <br>
+
+
+<%# f.label "Ingredient" %>
 
 <%= f.submit  %>
 <% end %>

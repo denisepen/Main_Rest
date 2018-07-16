@@ -1,10 +1,10 @@
-<h1>Menu</h1>
+<h1>Menu</h1> <br>
 <% if @meals %>
 <% @meals.each do |meal| %>
-    <h3><%= meal.name %> <%= "      " %>  <%= link_to "View", meal_path(meal)  %> </h3>
-    <h5><%= meal.description %></h5>
-    <h5><%= meal.calorie_count %> Calories |
-    <%= number_to_currency(meal.price) %></h5>
+    <h3><%= link_to meal.name, meal_path(meal) %>  </h3>
+    <!-- <h5><%# meal.description %></h5>
+    <h5><%# meal.calorie_count %> Calories | -->
+    <%= number_to_currency(meal.price) %></h5> <br> <br>
 
 
     <% if current_user %>

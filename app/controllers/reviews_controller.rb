@@ -2,10 +2,11 @@ class ReviewsController < ApplicationController
     before_action :logged_in?, only: [:new, :create, :edit, :update, :delete]
 
   def new
-    @review = Review.new
+    @review = Review.new #(user_id: params[:user_id])
   end
 
   def create
+    # @review = Review.new(review_params)
     if !logged_in?
       flash[:notice] = "Must be signed in to create review"
       redirect_to root_path
@@ -15,13 +16,19 @@ class ReviewsController < ApplicationController
     elsif params[:user_id]
       @user = User.find_by(id: params[:user_id])
       @review = @user.reviews.build(review_params)
-      @review.save
-    redirect_to reviews_path
+      if @review.save
+        redirect_to reviews_path
+       else
+        render :new
+      end
   else
-      @user = User.find_by(id: session[:user_id])
+      @user = current_user #User.find_by(id: session[:user_id])
       @review = @user.reviews.build(review_params)
-      @review.save
-    redirect_to reviews_path
+       if @review.save
+         redirect_to reviews_path
+       else
+         render :new
+       end
   end
 end
 
@@ -30,20 +37,34 @@ end
   end
 
   def edit
-    @review = Review.find_by(user_id: params[:user_id])
+    # @review = Review.find_by(user_id: params[:user_id])
+    @review = Review.find(params[:id])
     if !is_admin? && current_user == @review.user
-      render 'edit'
+      if params[:userid]
+        user = User.find_by(id: [:user_id])
+        @review = user.reviews.find_by(id: params[:id])
+        redirect_to user_reviews_path(user), alert: "Review not found" if @review.nil?
+      else
+        @review = Review.find(params[:id])
+      end
     else
       flash[:notice] = "You can't edit this review!"
       redirect_to reviews_path
     end
+
+    # if !is_admin? && current_user == @review.user
+    #   render 'edit'
+    # else
+    #   flash[:notice] = "You can't edit this review!"
+    #   redirect_to reviews_path
+    # end
   end
 
   def update
     @review = Review.find(params[:id])
     @review.update(review_params)
     @user = @review.user
-    redirect_to user_path(@user)
+    redirect_to user_reviews_path(@user)
   end
 
   def index
@@ -58,10 +79,11 @@ end
   def destroy
     @review = Review.find(params[:id])
 
-    if !is_admin && current_user
+    if !is_admin? && current_user == @review.user
       @review.destroy
       redirect_to reviews_path
     else
+      redirect_to reviews_path
       flash[:notice] = "You can't delete this review!"
   end
 end

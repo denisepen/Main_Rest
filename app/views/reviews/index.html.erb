@@ -3,11 +3,11 @@
 <br>
   <% if @reviews %>
 <% @reviews.each do |review|%>
-  <h3><%= link_to review.title, review_path(review) %></h3>
+  <h3 ><%= link_to review.title, review_path(review) %> | <%= link_to "Edit Review", edit_user_review_path(review.user, review)  %> | <%= link_to "Delete", review, method: :delete  %> </h3>
   <p><%= review.comment %></p>
-  <p>Date: <%= review.date_posted %></p>
+  <p>Date: <%= (review.date_posted).strftime("%b %d, %Y") %></p>
   <p>by: <%= link_to review.user.named, user_reviews_path(review.user) %></p> <br><br>
 <% end %>
 
 <% end %>
-<h3><%= link_to "Create A New Review", new_user_review_path(current_user)  %></h3>
+<h3><%= link_to "Create A New Review", new_user_review_path(current_user) if current_user %></h3>

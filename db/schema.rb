@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_155334) do
     t.integer "user_id"
     t.datetime "date"
     t.text "comment"
-    t.text "status"
+    t.text "status", default: "new"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

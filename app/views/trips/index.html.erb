@@ -1,4 +1,6 @@
 <h1>Order History</h1>
+
+<%# sum_of_totals = 0 %>
 <table style="width: 75%;">
   <tr>
     <th style="text-align: left;">Date</th>
@@ -10,8 +12,13 @@
       <% if trip.user%>
         <td><%=  trip.date.strftime("%m/%d/%y, %l:%M %p") %></td>
         <td><%= link_to trip.user.named, user_path(trip.user) %></td>
-        <td><%= number_to_currency(trip.total) %></td>
+        <%  @trip_total = trip.total %>
+        <% @sum_of_totals+= @trip_total %>
+        <td><%= number_to_currency(@trip_total) %></td>
       <% end %>
     </tr>
   <% end %>
+
+  Total: <%# Trip.admin_total %><%= @sum_of_totals %>
+
 </table>

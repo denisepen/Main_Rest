@@ -9,12 +9,12 @@
 
 <% @user.trips.each do |trip| %>
 <% if !trip.meals.empty? %>
-  <%= "Order No. #{trip.id}"%> <br>
+  <%= "Order No. #{trip.id}"%> |
   <%= "Date: #{trip.date.strftime("%m/%d/%y, %l:%M %p")}"  if !trip.meals.empty?%> <br>
-  <%= "Total:  #{trip.total}" if !trip.meals.empty? %> <br>
+  <%= "Total:  #{number_to_currency(trip.total)}" if !trip.meals.empty? %> <br> <br>
   <% trip.meals.each do |meal| %>
   Meal: <%= meal.name %> <br>
-  Price: <%= meal.price %> <br>
+  Price: <%= number_to_currency(meal.price) %> <br>
   <% end %>
   <% end %>
    <br> <br>
