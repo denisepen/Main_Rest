@@ -9,7 +9,7 @@ class TripsController < ApplicationController
   end
 
   def index
-  
+
     @sum_of_totals = 0
     if is_admin?
      @trips = Trip.all
@@ -45,7 +45,8 @@ end
 
   def trip_complete
     session[:total] = 0
-    session.clear
+     session.clear
+    # redirect_to new_trip_path
   end
 
   private
