@@ -5,6 +5,7 @@ class TripsController < ApplicationController
     @trip = Trip.create!(user_id: session[:user_id], date: Time.now)
      session[:trip_id] = @trip.id
      session[:total] = @trip.total
+     @trip.status = "new"
       redirect_to :root
   end
 
@@ -12,7 +13,18 @@ class TripsController < ApplicationController
 
     @sum_of_totals = 0
     if is_admin?
-     @trips = Trip.all
+      # if !params[:date].blank?
+        if params[:date] == "Today"
+          @trips = Trip.today
+        elsif params[:date] == "This Week"
+          @trips = Trip.this_week
+        elsif params[:date] == "This Week"
+          @trips = Trip.this_year
+        else
+          @trips = Trip.all
+        end
+      # end
+
    elsif current_user
      @trips = current_user.trips
    else

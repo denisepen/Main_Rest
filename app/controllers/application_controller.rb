@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?, :authenticate_user
+  helper_method :current_user, :logged_in?, :authenticate_user, :is_admin?, :current_trip
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def current_trip
+    @trip ||= Trip.find_by(id: session[:trip_id]) if session[:trip_id]
   end
 
   def logged_in?

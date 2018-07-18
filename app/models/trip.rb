@@ -2,11 +2,12 @@ class Trip < ApplicationRecord
   belongs_to :user
   has_many :orders
   has_many :meals, through: :orders
-
+  scope :today, -> { where("date >= ?", Time.zone.today.beginning_of_day) }
+  scope :this_week, -> { where('date BETWEEN ? AND ?', 7.days.ago, Time.now) }
+  scope :this_year, -> { where('date BETWEEN ? AND ?', 365.days.ago, Time.now) }
+  scope :greater_than_twenty, -> { where'total > ?', 20}
 
   def total
-    # where(trip_id: trip.id).joins(:meal).sum("price")
-    # joins(:meal).sum("price")
     meals.sum(&:price)
   end
 

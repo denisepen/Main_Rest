@@ -3,7 +3,6 @@
 
 
 <div>
-
   <%= form_tag("/meals", method: "get") do %>
   <h3>Filter Meals:</h3> <br>
     Category <%= select_tag "category", options_for_select(["Main", "Side", "Dessert", "Drink"]), include_blank: true %> <br>

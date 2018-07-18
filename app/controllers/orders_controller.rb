@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     @order.trip.status = "pending"
     @order.id = session[:order_id]
     flash[:notice] = "Meal added to Order"
-    redirect_to trip_path(session[:trip_id])
+    redirect_to trip_path(current_trip)
   else
     flash[:notice] = "You must sign in to place order"
     redirect_to :root

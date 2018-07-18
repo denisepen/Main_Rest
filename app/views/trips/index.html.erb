@@ -1,5 +1,14 @@
 <h1>Order History</h1>
 
+<div>
+  <%= form_tag("/trips", method: "get") do %>
+  <h3>Filter Customer Orders:</h3> <br>
+    Category <%= select_tag "date", options_for_select(["Today", "This Week", "This Year"]), include_blank: true %> <br>
+
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+
 <table style="width: 75%;">
   <tr>
     <th style="text-align: left;">Date</th>
