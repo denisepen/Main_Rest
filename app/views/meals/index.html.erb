@@ -1,9 +1,20 @@
 <h1>Menu</h1> <br>
-<%# if @meals %>
+
+
+
+<div>
+
+  <%= form_tag("/meals", method: "get") do %>
+  <h3>Filter Meals:</h3> <br>
+    Category <%= select_tag "category", options_for_select(["Main", "Side", "Dessert", "Drink"]), include_blank: true %> <br>
+     Low Calorie <%= select_tag "calorie_count", options_for_select(["Low Cal"]), include_blank: true %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+
 <% @meals.each do |meal| if @meals %>
     <h3><%= link_to meal.name, meal_path(meal) %>  </h3>
-    <%= number_to_currency(meal.price) %></h5> <br> <br>
-
+    <%= number_to_currency(meal.price) %></h5>
 
     <% if current_user %>
     <% if current_user.admin %>
