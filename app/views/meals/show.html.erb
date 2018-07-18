@@ -4,14 +4,8 @@
 
 Price: <%= number_to_currency(@meal.price) %>  | <%= @meal.calorie_count %> Calories
 
-<% if current_user %>
-  <% if current_user.admin %>
-    <%= link_to "Edit", edit_meal_path(@meal)  %></td><br>
-  <% end %>
-<% end %>
+<%= link_to "Edit", edit_meal_path(@meal) if current_user && is_admin?  %></td><br>
 
-<br> <br>
+ <br>
 
 <%= link_to "Add to Order", new_order_path %><br> <br>
-
-<%# button_to "Go on this ride", go_path, method: 'get' %>

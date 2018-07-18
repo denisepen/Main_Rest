@@ -1,0 +1,17 @@
+<% if @meal.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@meal.errors.count, "error") %>
+      prohibited this meal from being saved:
+    </h2>
+
+    <ul>
+    <% @meal.errors.full_messages.each do |msg| %>
+    <% if @meal.errors.any? %>
+    <li><%= msg %></li>
+    <% end %>
+    </ul>
+
+    </div>
+    <% end %>
+    <% end %>
