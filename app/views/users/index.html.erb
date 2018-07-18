@@ -5,11 +5,12 @@
   Name: <%= c.named %> <br>
 
   Email: <%= c.email %> <br>
-  <%if c.orders %>
+  <%if c.trips %>
   <%# binding.pry %>
   Orders: <br>
-  <% c.orders.each do |order| %>
-    Date: <%= link_to order.date, user_order_path(c.id, order.id)  %> <br>
+  <% c.trips.each do |trip| %>
+    Date: <%= link_to (trip.date).strftime("%m/%d/%Y"), user_trip_path(c.id, trip.id) %>
+    Total: <%= trip.total  %> <br>
     <%# order.comment %>
     <% end %>
     <% end %>

@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
 
   def index
+    if  is_admin?
     @users = User.all
+  else
+    redirect_to :root
+  end
+
+  # is_admin? ? @users = User.all : redirect_to :root
   end
 
   def new

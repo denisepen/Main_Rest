@@ -2,7 +2,7 @@
 
 <h1>Account Information: <%= @user.named %>
 
-<h3>Email: <%= @user.email %> <%= link_to "| Edit Account", edit_user_path(@user)  %></h3><br>
+<h3>Email: <%= @user.email %> <%= link_to "| Edit Account", edit_user_path(@user) if @user == current_user %></h3><br>
 
 <h4>Orders:</h4>
 
