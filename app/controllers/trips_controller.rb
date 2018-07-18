@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  after_action :trip_complete, only: [:checkout]
+   # after_action :trip_complete, only: [:checkout]
 
   def new
     @trip = Trip.create!(user_id: session[:user_id], date: Time.now)
@@ -40,14 +40,21 @@ end
   end
 
   def checkout
+     if session[:total].to_i > 0
     render :checkout
+    session[:total] = 0
+    session.clear
+   else
+     flash[:notice] = "Your cart is empty. Please add a meal to your cart before checkout."
+    redirect_to meals_path
+   end
   end
 
   def trip_complete
-    session[:total] = 0
+     session[:total] = 0
      session.clear
-    # redirect_to new_trip_path
-  end
+     redirect_to :root
+end
 
   private
 

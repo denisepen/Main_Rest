@@ -1,9 +1,0 @@
-<h2><%= current_user.first_name  %> <%= current_user.last_name %>'s Order</h2>
-
-<% current_user.meals.each do |meal| %>
-<h3>  <%= meal.name %> <%= meal.price %>  <%= link_to "Remove", meal, method: :delete  %></h3>
-  <% end %>
-
-  <h4><%= "Total: SUM OF MEALS " %></h4>
-
-  <h4><%= link_to "Check Out", </h4>

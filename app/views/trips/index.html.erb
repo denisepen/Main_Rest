@@ -3,6 +3,7 @@
 <table style="width: 75%;">
   <tr>
     <th style="text-align: left;">Date</th>
+    <th style="text-align: left;">Order No.</th>
     <th style="text-align: left;">Name</th>
     <th style="text-align: left;">Order Total</th>
   </tr>
@@ -10,6 +11,7 @@
     <tr>
       <% if trip.user%>
         <td><%=  trip.date.strftime("%m/%d/%y, %l:%M %p") %></td>
+        <td><%=  trip.id %></td>
         <td><%= link_to trip.user.named, user_path(trip.user) %></td>
         <%  @trip_total = trip.total %>
         <% @sum_of_totals+= @trip_total %>
