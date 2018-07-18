@@ -13,6 +13,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/denise
 
 # License
 This application is available as open source under the terms of the MIT License.
+The license can be found here: https://github.com/denisepen/Main_Rest/blob/master/LICENSE
 
 # Code of Conduct
 Everyone interacting in this application's codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct.
