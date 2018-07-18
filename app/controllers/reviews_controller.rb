@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Admin can't create reviews!"
       redirect_to root_path
     elsif  params[:user_id]
-      # binding.pry
+
       @user = User.find_by(id: params[:id])
       @review = @user.reviews.build(review_params)
       if @review.save
@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
        else
         render :new
       end
-    # end
+
   else
       @user = User.find_by(id: session[:user_id])
       @review = @user.reviews.build(review_params)
@@ -39,10 +39,10 @@ end
   end
 
   def edit
-    # @review = Review.find_by(user_id: params[:user_id])
+
     @review = Review.find(params[:id])
     if !is_admin? && current_user == @review.user
-      if params[:userid]
+      if params[:user_id]
         user = User.find_by(id: [:user_id])
         @review = user.reviews.find_by(id: params[:id])
         redirect_to user_reviews_path(user), alert: "Review not found" if @review.nil?
