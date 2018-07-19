@@ -10,6 +10,11 @@
 <%= f.number_field :price, :class => 'text_field', :step => 0.05 %> <br>
 <%= f.label :category%>
 <%= f.select :category, Meal.all.collect{|u| [u.category]}.uniq %> <br>
-
+<%# f.text_field :category, list: "categories_autocomplete" %>
+  <!-- <datalist id="categories_autocomplete"> -->
+    <%# Meal.all.each do |u| %>
+    <!-- <option value="<%# u.category %>"> -->
+    <%# end %>
+  <!-- </datalist> -->
 
 <%= f.submit  %>
