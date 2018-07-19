@@ -9,7 +9,7 @@
 <%= f.label :price%>
 <%= f.number_field :price, :class => 'text_field', :step => 0.05 %> <br>
 <%= f.label :category%>
-<%= f.text_field :category %> <br>
+<%= f.select :category, Meal.all.collect{|u| [u.category]}.uniq %> <br>
 
 
 <%= f.submit  %>
