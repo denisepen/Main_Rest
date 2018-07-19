@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2018_07_14_155334) do
 
-  create_table "meal_ingredients", force: :cascade do |t|
-    t.integer "meal_id"
-    t.integer "ingredient_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "meals", force: :cascade do |t|
     t.string "name"
     t.decimal "price"

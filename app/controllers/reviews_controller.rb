@@ -43,7 +43,7 @@ end
     @review = Review.find(params[:id])
     if !is_admin? && current_user == @review.user
       if params[:user_id]
-        user = User.find_by(id: [:user_id])
+        user = User.find_by(id: params[:user_id])
         @review = user.reviews.find_by(id: params[:id])
         redirect_to user_reviews_path(user), alert: "Review not found" if @review.nil?
       else
