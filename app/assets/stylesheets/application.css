@@ -158,6 +158,22 @@ div.alert{
   display: table;
 }
 
+/* div.meal-filter form  {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: #f7f7f9;
+  flex-direction: row
+} */
+
+div.meal-filter form {
+  background: none;
+}
+
+div.meal-filter form input[type="submit"] {
+  margin-top: 0;
+}
+
 /* header::after {
   content: '';
   display: table;

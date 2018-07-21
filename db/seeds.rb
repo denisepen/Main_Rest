@@ -45,6 +45,30 @@ Meal.create(
 )
 
 Meal.create(
+  name: "Chocolate Lava Cake",
+  price: 8.00,
+  description: "Delicious chocolate cake with warm and
+    decadent center",
+  calorie_count: 600,
+  category: "Dessert"
+)
+
+Meal.create(
+  name: "Strawbery Cheese Cake",
+  price: 7.750,
+  description: "A slice of delcious cheese cake combined with strawberry puree",
+  calorie_count: 600,
+  category: "Dessert"
+)
+Meal.create(
+  name: "House Salad",
+  price: 6.00,
+  description: "Salad with romaine lettuce, cherry tomatoes, sliced cucumbers and your choice of dressing."
+  calorie_count: 450,
+  category: "Side"
+)
+
+Meal.create(
   name: "Mashed Potatoes",
   price: 5.95,
   description: "Organically grown red potatoes pureed
@@ -63,19 +87,11 @@ Meal.create(
   category: "Side"
 )
 
+
 Meal.create(
   name: "Red Wine",
   price: 10.95,
   description: "Delicious red wine from the Bordeaux Region",
   calorie_count: 775,
   category: "Drink"
-)
-
-Meal.create(
-  name: "Chocolate Lava Cake",
-  price: 8.00,
-  description: "Delicious chocolate cake with warm and
-    decadent center",
-  calorie_count: 600,
-  category: "Dessert"
 )

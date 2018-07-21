@@ -3,7 +3,7 @@ class Meal < ApplicationRecord
   has_many :orders
   has_many :trips, through: :orders
   validates :name, :description, :price, :category, presence: true
-  scope :low_cal, -> { where("calorie_count <= ?", 350) }
+  scope :low_cal, -> { where("calorie_count <= ?", 450) }
 
 
   def self.by_category(category)
