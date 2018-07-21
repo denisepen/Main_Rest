@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
-   # after_action :trip_complete, only: [:checkout]
-
+  include ActionView::Helpers::NumberHelper
+  
   def new
     @trip = Trip.create!(user_id: session[:user_id], date: Time.now)
      session[:trip_id] = @trip.id
@@ -56,18 +56,13 @@ end
     session[:total] = 0
     @trip.status = "complete"
     redirect_to new_trip_path
-    flash[:notice] = "Thank you for your order #{@trip.user.named}. Your order total is $#{@trip.total}"
+    flash[:notice] = "Thank you for your order #{@trip.user.named}. Your order total is #{number_to_currency(@trip.total)}"
    else
      flash[:notice] = "Your cart is empty. Please add a meal to your cart before checkout."
     redirect_to meals_path
    end
   end
 
-  def trip_complete
-     session[:total] = 0
-     session.clear
-     redirect_to :root
-end
 
   private
 
