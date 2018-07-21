@@ -3,9 +3,8 @@
 
 <div class = "filter trip-filter">
   <%= form_tag("/trips", method: "get") do %>
-  <h3>Filter Orders:</h3>
+    <h3>Filter Orders:</h3>
     Category <%= select_tag "date", options_for_select(["Today", "This Week", "This Year"]), include_blank: true %>
-
     <%= submit_tag "Filter" %>
   <% end %>
 </div>

@@ -46,14 +46,17 @@ end
   def update
     @trip = Trip.find_by(id: session[:trip_id])
     @trip.update(trip_params)
+    redirect_to trip_path(@trip)
   end
 
   def checkout
     @trip = Trip.find_by(id: session[:trip_id])
      if session[:total].to_i > 0
-    render :checkout
+
     session[:total] = 0
-    session.clear
+    @trip.status = "complete"
+    redirect_to new_trip_path
+    flash[:notice] = "Thank you for your order #{@trip.user.named}. Your order total is $#{@trip.total}"
    else
      flash[:notice] = "Your cart is empty. Please add a meal to your cart before checkout."
     redirect_to meals_path

@@ -36,6 +36,22 @@ Meal.create(
 )
 
 Meal.create(
+  name: "Cheese Burger",
+  price: 10.95,
+  description: "Cheeseburger with lettuce, tomatoes, onions, and pickles",
+  calorie_count: 750,
+  category: "Main"
+)
+
+Meal.create(
+  name: "Baked Trout",
+  price: 15.95,
+  description: "Trout filet baked in white wine with lemons, garlic, and rosemary",
+  calorie_count: 375,
+  category: "Main"
+)
+
+Meal.create(
   name: "Chicken and Broccoli",
   price: 8.95,
   description: "Chicken and broccoli stir fried in
@@ -55,11 +71,20 @@ Meal.create(
 
 Meal.create(
   name: "Strawbery Cheese Cake",
-  price: 7.750,
+  price: 7.75,
   description: "A slice of delcious cheese cake combined with strawberry puree",
   calorie_count: 600,
   category: "Dessert"
 )
+
+Meal.create(
+  name: "Vanilla Ice Cream",
+  price: 5.00,
+  description: "Two scoops of vanilla ice cream",
+  calorie_count: 425,
+  category: "Dessert"
+)
+
 Meal.create(
   name: "House Salad",
   price: 6.00,
@@ -93,5 +118,21 @@ Meal.create(
   price: 10.95,
   description: "Delicious red wine from the Bordeaux Region",
   calorie_count: 775,
+  category: "Drink"
+)
+
+Meal.create(
+  name: "Coke",
+  price: 2.95,
+  description: "Coca Cola",
+  calorie_count: 400,
+  category: "Drink"
+)
+
+Meal.create(
+  name: "Bottled Water",
+  price: 4.95,
+  description: "Evian Spring Water",
+  calorie_count: 100,
   category: "Drink"
 )

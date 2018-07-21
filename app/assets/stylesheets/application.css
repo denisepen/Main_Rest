@@ -160,9 +160,9 @@ div.alert{
 }
 
  div.trip-filter form  {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  /* display: flex; */
+  /* justify-content: space-around; */
+  /* align-items: flex-start; */
 }
 
 
@@ -173,6 +173,7 @@ div.filter form {
 
 div.filter form input[type="submit"] {
   margin-top: 0;
+  /* padding: 0; */
 }
 
 div.meals  {

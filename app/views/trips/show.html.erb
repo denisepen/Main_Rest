@@ -1,5 +1,6 @@
 <% if current_user %>
 <h1><%= current_user.named %>'s Order No. <%= @trip.id  %>  </h1> <br>
+  <h3>Comment: <%=  @trip.comment if @trip.comment %> </h3> <br>
 
 
 <% @trip.orders.each do |order| %>
@@ -15,7 +16,7 @@
 <%= form_for @trip, :method => :put do |f| %>
 <p class="form-title">Comment</p>
 <%= f.text_area :comment %>
-<%= f.submit %>
+<%= f.submit "Add Comment"%>
 <% end %>
 
 

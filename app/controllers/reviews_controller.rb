@@ -53,13 +53,6 @@ end
       flash[:notice] = "You can't edit this review!"
       redirect_to reviews_path
     end
-
-    # if !is_admin? && current_user == @review.user
-    #   render 'edit'
-    # else
-    #   flash[:notice] = "You can't edit this review!"
-    #   redirect_to reviews_path
-    # end
   end
 
   def update
