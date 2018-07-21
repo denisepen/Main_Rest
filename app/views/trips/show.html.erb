@@ -12,6 +12,13 @@
 <h3>Total: <%= number_to_currency(@trip.total) %></h3> <br>
 <% end %>
 
+<%= form_for @trip, :method => :put do |f| %>
+<p class="form-title">Comment</p>
+<%= f.text_area :comment %>
+<%= f.submit %>
+<% end %>
+
+
 <h3><%= link_to "Check Out", checkout_path %></h3>
 <%# end %>
 <%# end %>

@@ -37,11 +37,8 @@ class TripsController < ApplicationController
     if trip.id == session[:trip_id]
     @trip = Trip.find(session[:trip_id])
     session[:total] = @trip.total
-    # session[:total] = Order.joins(:trip).where(trip_id: session[:trip_id]).joins(:meal).sum("price")
-    # binding.pry
   else
     @trip = Trip.find_by(id: params[:id])
-    # @trip_total = trip.total
   end
 end
 
@@ -52,6 +49,7 @@ end
   end
 
   def checkout
+    @trip = Trip.find_by(id: session[:trip_id])
      if session[:total].to_i > 0
     render :checkout
     session[:total] = 0

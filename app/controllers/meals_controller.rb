@@ -16,19 +16,18 @@ class MealsController < ApplicationController
   end
 
   def index
-    # @meals = Meal.all
 
-    if !params[:category].blank?
+    if !params[:category].blank? && !params[:calorie_count].blank?
+      @meals = Meal.by_category(params[:category]).low_cal
+    elsif !params[:category].blank? && params[:calorie_count].blank?
       @meals = Meal.by_category(params[:category])
-    elsif !params[:calorie_count].blank?
-      if params[:calorie_count] == "Low Cal"
-      @meals = Meal.low_cal
+     elsif  !params[:calorie_count].blank?
+       @meals = Meal.low_cal
+    else
+    # if no filters are applied, show all posts
+    @meals = Meal.all
+
     end
-      else
-      # if no filters are applied, show all posts
-      @meals = Meal.all
-  
-end
   end
 
 
