@@ -1,15 +1,16 @@
+<div id="trips">
 <h1>Order History</h1>
 
-<div>
+<div class = "filter trip-filter">
   <%= form_tag("/trips", method: "get") do %>
-  <h3>Filter Customer Orders:</h3> <br>
-    Category <%= select_tag "date", options_for_select(["Today", "This Week", "This Year"]), include_blank: true %> <br>
+  <h3>Filter Orders:</h3>
+    Category <%= select_tag "date", options_for_select(["Today", "This Week", "This Year"]), include_blank: true %>
 
     <%= submit_tag "Filter" %>
   <% end %>
 </div>
 
-<table style="width: 75%;">
+<table class="trips-table">
   <tr>
     <th style="text-align: left;">Date</th>
     <th style="text-align: left;">Order No.</th>
@@ -32,3 +33,4 @@
    <h2>Sum Total: <%# Trip.admin_total %><%= number_to_currency(@sum_of_totals) %></h2>
 
 </table>
+</div>

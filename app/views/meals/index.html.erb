@@ -1,27 +1,53 @@
-<h1>Menu</h1> <br>
+
+<div class="meals">
+    <h1>Menu</h1> <br>
 
 
 
-<div class = "meal-filter">
-  <%= form_tag("/meals", method: "get") do %>
-<!-- <h3>Filter</h3> -->
-    Category <%= select_tag "category", options_for_select(["Main", "Side", "Dessert", "Drink"]), include_blank: true %>
-    Low Calorie <%= select_tag "calorie_count", options_for_select(["Low Cal"]), include_blank: true %>
-    <%= submit_tag "Filter" %>
-  <% end %>
-</div>
-
-<% @meals.each do |meal| if @meals %>
-    <h3><%= link_to meal.name, meal_path(meal) %> <%= number_to_currency(meal.price) %>  </h3>
-
-
-    <% if current_user %>
-    <% if current_user.admin %>
-      <%= link_to "Delete", meal, method: :delete  %> | <%= link_to "Edit", edit_meal_path(meal)  %><br> <br>
-    <% else %>
-      <br> <br>
+    <div class = "filter">
+      <%= form_tag("/meals", method: "get") do %>
+    <!-- <h3>Filter</h3> -->
+        Category <%= select_tag "category", options_for_select(["Main", "Side", "Dessert", "Drink"]), include_blank: true %>
+        Low Calorie <%= select_tag "calorie_count", options_for_select(["Low Cal"]), include_blank: true %>
+        <%= submit_tag "Filter" %>
       <% end %>
+    </div> <br>
 
-<% end %>
-<% end %>
-<% end %>
+  <table id="meals">
+    <tr>
+      <th>Meal</th>
+      <th>Price</th>
+      <th><% %></th>
+    </tr>
+  <% @meals.each do |meal| if @meals %>
+    <tr>
+      <td><%= link_to meal.name, meal_path(meal) %></td>
+      <td><%= number_to_currency(meal.price) %></td>
+      <% if current_user && current_user.admin %>
+      <td> <%= link_to "Delete", meal, method: :delete  %> | <%= link_to "Edit", edit_meal_path(meal)  %></td>
+        <% end %>
+        <% end %>
+    </tr>
+
+  <% end %>
+</table>
+
+
+
+
+        <!-- <h3><%# link_to meal.name, meal_path(meal) %> <%# number_to_currency(meal.price) %>  </h3> <br> -->
+
+        <%# if current_user %>
+        <%# if current_user.admin %>
+          <%# link_to "Delete", meal, method: :delete  %>  <%# link_to "Edit", edit_meal_path(meal)  %><br> <br>
+        <%# else %>
+          <!-- <br> <br> -->
+          <%# end %>
+
+    <%# end %>
+    <%# end %>
+    <%# end %>
+
+
+
+</div>
