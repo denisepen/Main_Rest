@@ -1,27 +1,35 @@
 module ApplicationHelper
-#   def current_user
-#    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-#  end
-#
-#  def current_trip
-#    @trip ||= Trip.find_by(id: session[:trip_id]) if session[:trip_id]
-#  end
-#
-#  def logged_in?
-#    !!current_user
-#  end
-#
-#  def authenticate_user
-#    if !logged_in?
-#      redirect_to root_path
-#    end
-#  end
-#
-#    def is_admin?
-#      if current_user.admin  #== true
-#        true
-#      else
-#        false
-#      end
-#    end
+
+  def login_helper
+
+    if !logged_in?
+      (link_to "sign up", new_user_path, method: 'get') + " | " +
+      (link_to "sign in", signin_path , method: 'get') + " | " +
+      (link_to('log in with Facebook', '/auth/facebook'))
+    else
+      (link_to current_user.named, user_path(current_user)) + " | " +
+      (link_to "Total: #{number_to_currency(session[:total])}", trip_path(session[:trip_id]) if session[:trip_id]) + " | " +
+      (link_to "log out", logout_path , method: 'post')
+    end
+
+
+
+
+  end
+
+  # <% if !logged_in? %>
+  #   <li><%=  link_to "sign up", new_user_path, method: 'get' %></li>
+  #   <li><%=  link_to "sign in", signin_path , method: 'get'%></li>
+  #   <li><%=  link_to('log in with Facebook', '/auth/facebook') %></li>
+  # <% else %>
+  #   <li> <%= link_to "log Out", logout_path , method: 'post'%> </li>
+  # <% end %>
+  #
+  # <% if current_user %>
+  #   <li class='nav'><%= link_to current_user.named, user_path(current_user) %></li>
+  #
+  #   <% if current_user.trips %>
+  #     <li><%= link_to "Total: #{number_to_currency(session[:total])}", trip_path(session[:trip_id]) if session[:trip_id] %></li>
+  #   <% end %>
+  # <% end %>
 end

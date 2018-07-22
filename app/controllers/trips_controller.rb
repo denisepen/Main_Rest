@@ -13,7 +13,6 @@ class TripsController < ApplicationController
 
     @sum_of_totals = 0
     if is_admin?
-
       # # if !params[:date].blank?
         if params[:date] == "Today"
           @trips = Trip.today
