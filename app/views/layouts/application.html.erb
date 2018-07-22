@@ -27,15 +27,7 @@
           <ul>
             <li><%= link_to "menu", meals_path%></li>
             <li><%= link_to "reviews", reviews_path%></li>
-            <% if current_user && current_user.admin %>
-              <li class='nav'><%= "ADMIN"  %></li>
-            <% end %>
-            <%# if current_user %>
-              <% if is_admin? %>
-                <li><%= link_to "Add New Meal", new_meal_path %></li>
-                <li><%= link_to "Customer Orders", trips_path %></li>
-              <% end %>
-            <%# end %>
+            <l1> <%= admin_items %></l1>
           </ul>
         </nav>
       </div>
