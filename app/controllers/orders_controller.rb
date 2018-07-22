@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "Meal added to Order"
       redirect_to trip_path(current_trip)
     else
-      flash[:notice] = "You must sign in to place order"
+      flash[:alert] = "You must sign in to place order"
       redirect_to :root
     end
   end

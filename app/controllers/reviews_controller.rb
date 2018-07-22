@@ -8,10 +8,10 @@ class ReviewsController < ApplicationController
   def create
     # @review = Review.new(review_params)
     if !logged_in?
-      flash[:notice] = "Must be signed in to create review"
+      flash[:alert] = "Must be signed in to create review"
       redirect_to root_path
     elsif is_admin?
-      flash[:notice] = "Admin can't create reviews!"
+      flash[:alert] = "Admin can't create reviews!"
       redirect_to root_path
     elsif  params[:user_id]
 
@@ -50,7 +50,7 @@ end
         @review = Review.find(params[:id])
       end
     else
-      flash[:notice] = "You can't edit this review!"
+      flash[:alert] = "You can't edit this review!"
       redirect_to reviews_path
     end
   end
@@ -79,7 +79,7 @@ end
       redirect_to reviews_path
     else
       redirect_to reviews_path
-      flash[:notice] = "You can't delete this review!"
+      flash[:alert] = "You can't delete this review!"
   end
 end
 

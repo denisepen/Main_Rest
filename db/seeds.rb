@@ -26,14 +26,7 @@ User.create!(first_name:  "Denise",
                password_confirmation: password)
 end
 
-Meal.create(
-  name: "Beef and Broccoli",
-  price: 7.95,
-  description: "Beef and broccoli stir fried in
-  a delicious garlic sauce",
-  calorie_count: 550,
-  category: "Main"
-)
+
 
 Meal.create(
   name: "Cheese Burger",
@@ -55,6 +48,15 @@ Meal.create(
   name: "Chicken and Broccoli",
   price: 8.95,
   description: "Chicken and broccoli stir fried in
+  a delicious garlic sauce",
+  calorie_count: 550,
+  category: "Main"
+)
+
+Meal.create(
+  name: "Beef and Broccoli",
+  price: 7.95,
+  description: "Beef and broccoli stir fried in
   a delicious garlic sauce",
   calorie_count: 550,
   category: "Main"
@@ -88,7 +90,15 @@ Meal.create(
 Meal.create(
   name: "House Salad",
   price: 6.00,
-  description: "Salad with romaine lettuce, cherry tomatoes, sliced cucumbers and your choice of dressing."
+  description: "Salad with romaine lettuce, cherry tomatoes, sliced cucumbers and your choice of dressing.",
+  calorie_count: 450,
+  category: "Side"
+)
+
+Meal.create(
+  name: "Caesar Salad",
+  price: 7.95,
+  description: "Delicious caesar salad",
   calorie_count: 450,
   category: "Side"
 )

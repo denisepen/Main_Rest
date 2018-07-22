@@ -61,7 +61,11 @@
     </header>
 
     <% flash.each do |name, msg| %>
+    <% if name.include? 'notice' %>
+      <%= content_tag :div, msg, class: "notice" %>
+      <% else %>
       <%= content_tag :div, msg, class: "alert alert-info" %>
+      <% end %>
     <% end %>
 
     <%= yield %>

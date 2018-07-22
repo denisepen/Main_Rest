@@ -14,4 +14,7 @@ class Trip < ApplicationRecord
   def self.admin_total
     joins(:meals).sum("price")
   end
+
+  
+
 end

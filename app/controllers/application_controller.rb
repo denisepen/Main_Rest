@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
     def is_admin?
-      if current_user.admin == true
+      if current_user && current_user.admin == true
         true
       else
         false

@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       # session[:total] = 0
       redirect_to new_trip_path
     else
-    flash[:notice] = "Email or password is invalid"
+    flash[:alert] = "Email or password is invalid"
     redirect_to signin_path
     end
    end
@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
     # session[:trip_id] = nil
     session[:total] = 0
     @trip = Trip.find_by(id: session[:trip_id])
-    # binding.pry
+    
     if @trip.status = "new"
       @trip.delete
     end

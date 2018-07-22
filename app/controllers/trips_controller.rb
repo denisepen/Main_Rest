@@ -13,7 +13,8 @@ class TripsController < ApplicationController
 
     @sum_of_totals = 0
     if is_admin?
-      # if !params[:date].blank?
+
+      # # if !params[:date].blank?
         if params[:date] == "Today"
           @trips = Trip.today
         elsif params[:date] == "This Week"
@@ -23,7 +24,7 @@ class TripsController < ApplicationController
         else
           @trips = Trip.all
         end
-      # end
+      # # end
 
    elsif current_user
      @trips = current_user.trips
@@ -58,7 +59,7 @@ end
     redirect_to new_trip_path
     flash[:notice] = "Thank you for your order #{@trip.user.named}. Your order total is #{number_to_currency(@trip.total)}."
    else
-     flash[:notice] = "Your cart is empty. Please add a meal to your cart before checkout."
+     flash[:alert] = "Your cart is empty. Please add a meal to your cart before checkout."
     redirect_to meals_path
    end
   end

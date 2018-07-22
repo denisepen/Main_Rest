@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :users, only: [:new, :show] do
       resources :reviews, only: [:new, :edit, :show, :index]
    end
-  resources :users 
+  resources :users
   resources :meals
   resources :orders, only: [:new, :destroy]
 

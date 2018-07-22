@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
 
   def index
-    if  is_admin?
-    @users = User.all
-  else
-    redirect_to :root
-  end
-
-  # is_admin? ? @users = User.all : redirect_to :root
+    if  is_admin? || !current_user
+      @users = User.all
+    else
+      redirect_to :root
+    end
   end
 
   def new
@@ -38,7 +36,7 @@ end
     @user = User.find(params[:id])
     @user = User.update(user_params)
 
-  redirect_to user_path
+    redirect_to user_path
   end
 
   def show
@@ -51,10 +49,6 @@ end
 
   end
 end
-
-  def order_page
-    @meals = current_user.meals
-  end
 
 private
 
