@@ -21,6 +21,8 @@ class TripsController < ApplicationController
           @trips = Trip.this_week
         elsif params[:date] == "This Week"
           @trips = Trip.this_year
+        elsif params[:date] == "Past Hour"
+          @trips = Trip.past_hour
         else
           @trips = Trip.all
         end
