@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
   include ActionView::Helpers::NumberHelper
-  
+
   def new
     @trip = Trip.create!(user_id: session[:user_id], date: Time.now)
      session[:trip_id] = @trip.id
@@ -52,11 +52,11 @@ end
   def checkout
     @trip = Trip.find_by(id: session[:trip_id])
      if session[:total].to_i > 0
-
+       @trip.date = Time.now
     session[:total] = 0
     @trip.status = "complete"
     redirect_to new_trip_path
-    flash[:notice] = "Thank you for your order #{@trip.user.named}. Your order total is #{number_to_currency(@trip.total)}"
+    flash[:notice] = "Thank you for your order #{@trip.user.named}. Your order total is #{number_to_currency(@trip.total)}."
    else
      flash[:notice] = "Your cart is empty. Please add a meal to your cart before checkout."
     redirect_to meals_path
