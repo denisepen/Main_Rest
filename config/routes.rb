@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
    resources :users, only: [:new, :show] do
     # nested resource for trips
-    resources :trips, only: [:show, :index]
+     resources :trips, only: [:show, :index]
    end
 
 
@@ -15,10 +15,10 @@ Rails.application.routes.draw do
     resources :users, only: [:new, :show] do
       resources :reviews, only: [:new, :edit, :show, :index]
    end
-  resources :users #, except: :show
+  resources :users 
   resources :meals
-  resources :orders
-  resources :ingredients
+  resources :orders, only: [:new, :destroy]
+
   get '/auth/facebook/callback' => 'sessions#create'
 
   get '/signin', to: 'sessions#signin'
@@ -26,7 +26,5 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#destroy'
 
    get '/add_meal', to: 'orders#add_meal'
-  # get '/add_meal', to: 'trips#add_meal'
-  # get '/order_page', to: 'users#order_page'
   get'/checkout', to: 'trips#checkout'
 end
