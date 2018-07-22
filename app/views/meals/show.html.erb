@@ -1,3 +1,5 @@
+  <div class="meal">
+
   <h1><%= @meal.name %></h1>
 
 <h3><%= @meal.description %></h3>
@@ -9,3 +11,4 @@ Price: <%= number_to_currency(@meal.price) %>  | <%= @meal.calorie_count %> Calo
  <br>
 
 <%= link_to "Add to Order", new_order_path %><br> <br>
+</div>

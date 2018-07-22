@@ -1,5 +1,7 @@
-<h1>reviews  </h1> <br>
-<h2><%= link_to "create review", new_user_review_path(current_user) if current_user  %></h2> <br>
+<div class="trip">
+
+<h1>reviews -  <%= link_to "new", new_user_review_path(current_user) if current_user  %></h1> <br>
+<h2></h2> <br>
 <h3><%= "Sign In to Leave A Review" if !current_user %></h3>
 
 <!-- <h2><%# link_to "Write A Review", new_user_review_path(current_user) %></h2> -->
@@ -14,3 +16,4 @@
 <% end %>
 
 <% end %>
+</div>
