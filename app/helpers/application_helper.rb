@@ -15,7 +15,6 @@ module ApplicationHelper
 
   def admin_items
     if logged_in? && is_admin?
-       # 'ADMIN' + " | " +
        (link_to "ADMIN  |  Add New Meal", new_meal_path) + " |  "  +
        (link_to "Customer Orders", trips_path)
        end
@@ -40,7 +39,7 @@ module ApplicationHelper
   #   <% end %>
   # <% end %>
 
-
+# orig. admin items from view page
   # #<% if current_user && current_user.admin %>
   #   <li class='nav'><%= "ADMIN"  %></li>
   # <% end %>
@@ -50,6 +49,7 @@ module ApplicationHelper
   #     <li><%= link_to "Customer Orders", trips_path %></li>
   #   <% end %>
 
+  #orig signin info from view page
   # <% if !logged_in? %>
   #   <li><%=  link_to "sign up", new_user_path, method: 'get' %></li>
   #   <li><%=  link_to "sign in", signin_path , method: 'get'%></li>

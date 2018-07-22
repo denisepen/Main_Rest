@@ -5,13 +5,13 @@
   Name: <%= c.named %> <br>
 
   Email: <%= c.email %> <br>
+
   <%if c.trips %>
-  <%# binding.pry %>
   Orders: <br>
   <% c.trips.each do |trip| %>
     Date: <%= link_to (trip.date).strftime("%m/%d/%Y"), user_trip_path(c.id, trip.id) %>
-    Total: <%= trip.total  %> <br>
-    <%# order.comment %>
+    Total: <%= number_to_currency(trip.total)  %> <br>
+    Comment: <%=  trip.comment if trip.comment %> <br>
     <% end %>
     <% end %>
     <hr>

@@ -12,9 +12,9 @@ class Trip < ApplicationRecord
     meals.sum(&:price)
   end
 
-  def self.admin_total
-    joins(:meals).sum("price")
-  end
+  # def self.admin_total
+  #   joins(:meals).sum("price")
+  # end
 
 
 

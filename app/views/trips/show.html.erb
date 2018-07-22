@@ -8,7 +8,6 @@
 <% @trip.orders.each do |order| %>
 <%= order.meal.name %>
 <%= number_to_currency(order.meal.price) %>
-<%# binding.pry %>
 <%= link_to "Delete", order, method: :delete if @trip.user && @trip == current_trip %> <br> <br>
 
 <% end %>
