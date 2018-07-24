@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-    before_action :logged_in?, only: [:new, :create, :edit, :update, :delete]
+    
 
   def new
     @review = Review.new #(user_id: params[:user_id])
