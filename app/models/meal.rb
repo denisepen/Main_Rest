@@ -11,8 +11,26 @@ class Meal < ApplicationRecord
   end
 
   def self.meal_count
-    meal_obj = joins(:trips).group(:name).count
-    
-    # meal_obj.to_a
+    # meals = joins(:trips).group(:name).count
+
+    sql = "SELECT meals.name, COUNT(meals.name) AS total FROM trips
+    LEFT OUTER JOIN orders
+    ON orders.trip_id = trips.id
+    LEFT OUTER JOIN meals
+    ON orders.meal_id = meals.id
+    GROUP BY meals.name
+    ORDER BY total DESC
+    LIMIT 1".
+    result = ActiveRecord::Base.connection.execute(sql)
+    result = result[0]
+    name = result['name']
+    total = result['total']
+
+    puts name
+    puts total
+    # meals = joins(:trips).select("COUNT(name) AS total").group(:name)
+    # raise records_array
+    # puts records_array
+    # meals.first.total
   end
 end
