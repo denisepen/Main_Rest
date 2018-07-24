@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-    
+
 
   def new
     @review = Review.new #(user_id: params[:user_id])
@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
       end
 
   else
-      @user = User.find_by(id: session[:user_id])
+      @user = current_user
       @review = @user.reviews.build(review_params)
        if @review.save
          redirect_to reviews_path

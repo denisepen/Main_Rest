@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-    
+
   def new
     @meal = Meal.new
   end
@@ -13,6 +13,10 @@ class MealsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def most_popular
+    @meal = Meal.meal_count
   end
 
   def index

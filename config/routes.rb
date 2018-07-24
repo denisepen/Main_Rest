@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get '/auth/facebook/callback' => 'sessions#create'
 
+  get '/most_popular', to: 'meals#most_popular'
+
   get '/signin', to: 'sessions#signin'
   post '/signin', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy'
