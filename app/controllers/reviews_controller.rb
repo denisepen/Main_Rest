@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
         render :new
       end
 
-  else
+  else 
       @user = current_user
       @review = @user.reviews.build(review_params)
        if @review.save

@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   def index
     if  is_admin? || !current_user
       @users = User.all
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: @users}
+      end
     else
       redirect_to :root
     end
@@ -17,7 +21,11 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to new_trip_path
+      # redirect_to new_trip_path
+      respond_to do |format|
+        format.html { redirect_to new_trip_path }
+        format.json { render json: @user}
+      end
     else
       render :new
     end
@@ -35,17 +43,28 @@ end
   def update
     @user = User.find(params[:id])
     @user = User.update(user_params)
-
-    redirect_to user_path
+    respond_to do |format|
+      format.html { redirect_to user_path }
+      format.json { render json: @user}
+    end
+    # redirect_to user_path
   end
 
   def show
-    if is_admin?
-     @user = User.find(params[:id])
-   elsif !is_admin? && current_user
-       @user = User.find(session[:user_id])
-   else
-     redirect_to meals_path
+    respond_to do |format|
+      if is_admin?
+       @user = User.find(params[:id])
+         format.html { render :show }
+         format.json  { render json: @user}
+     elsif !is_admin? && current_user
+         # @user = User.find(session[:user_id])
+         @user = User.find(session[:user_id])
+         format.html { render :show }
+         format.json  { render json: @user }
+
+     else
+       redirect_to meals_path
+     end
 
   end
 end
