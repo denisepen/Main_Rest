@@ -25,10 +25,17 @@ class TripsController < ApplicationController
         else
           @trips = Trip.all
         end
-      # # end
+        respond_to do |format|
+          format.html { render :index }
+          format.json { render json: @trips}
+        end
 
    elsif current_user
      @trips = current_user.trips
+     respond_to do |format|
+       format.html { render :index }
+       format.json { render json: @trips}
+     end
    else
      redirect_to root_path
    end
@@ -39,8 +46,16 @@ class TripsController < ApplicationController
     if trip.id == session[:trip_id]
     @trip = Trip.find(session[:trip_id])
     session[:total] = @trip.total
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @trip}
+    end
   else
     @trip = Trip.find_by(id: params[:id])
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @trip}
+    end
   end
 end
 
@@ -48,7 +63,12 @@ end
   def update
     @trip = Trip.find_by(id: session[:trip_id])
     @trip.update(trip_params)
-    redirect_to trip_path(@trip)
+    respond_to do |format|
+      format.html { redirect_to trip_path(@trip) }
+      format.json { render json: @trip}
+      # redirect_to trip_path(@trip)
+    end
+
   end
 
   def checkout
