@@ -6,12 +6,15 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
-
-    if @meal.save
-      session[:meal_id] = @meal.id
-      redirect_to meals_path
+    respond_to do |format|
+      if @meal.save
+        session[:meal_id] = @meal.id
+      # redirect_to meals_path
+          format.html { redirect_to meals_path }
+          format.json  #{ render json: @meals}
     else
       render :new
+      end
     end
   end
 
@@ -31,6 +34,11 @@ class MealsController < ApplicationController
     # if no filters are applied, show all posts
     @meals = Meal.all
 
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @meals}
+    end
+
     end
   end
 
@@ -39,6 +47,11 @@ class MealsController < ApplicationController
   def show
     @meal = Meal.find(params[:id])
     session[:meal_id] = @meal.id
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @meal, status: 200}
+    end
+    # render json: @meal, status: 200
   end
 
   def edit
@@ -54,7 +67,12 @@ class MealsController < ApplicationController
      # binding.pry
     @meal = Meal.find(params[:id])
     @meal.update(meal_params)
-    redirect_to meal_path(@meal)
+    respond_to do |format|
+      format.html { redirect_to meal_path(@meal) }
+      format.json { render json: @meal}
+    end
+
+    # redirect_to meal_path(@meal)
   end
 
   def destroy
