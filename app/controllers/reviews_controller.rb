@@ -18,7 +18,11 @@ class ReviewsController < ApplicationController
       @user = User.find_by(id: params[:id])
       @review = @user.reviews.build(review_params)
       if @review.save
-        redirect_to reviews_path
+        respond_to do |format|
+          format.html { redirect_to reviews_path }
+          format.json { render json: @review, status: 201}
+        end
+
        else
         render :new
       end
@@ -27,7 +31,10 @@ class ReviewsController < ApplicationController
       @user = current_user
       @review = @user.reviews.build(review_params)
        if @review.save
-         redirect_to reviews_path
+         respond_to do |format|
+           format.html { redirect_to reviews_path }
+           format.json { render json: @review, status: 201}
+         end
        else
          render :new
        end
@@ -36,6 +43,10 @@ end
 
   def show
     @review = Review.find_by(id: params[:id])
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @review}
+    end
   end
 
   def edit
@@ -59,16 +70,26 @@ end
     @review = Review.find(params[:id])
     @review.update(review_params)
     @user = @review.user
-    redirect_to user_reviews_path(@user)
+    respond_to do |format|
+      format.html { redirect_to user_reviews_path(@user) }
+      format.json { render json: @review}
+    end
+    # redirect_to user_reviews_path(@user)
   end
 
   def index
     # binding.pry
+
     if params[:user_id]
       @reviews = User.find(params[:user_id]).reviews
    else
       @reviews = Review.all
     end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @reviews}
+    end
+
   end
 
   def destroy
