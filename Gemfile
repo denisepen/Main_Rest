@@ -6,6 +6,11 @@ gem 'omniauth-facebook'
 gem 'omniauth'
 gem 'dotenv-rails'
 gem 'pry'
+gem 'active_model_serializers', '0.10.6'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
