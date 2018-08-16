@@ -14,14 +14,14 @@
 
   <table id="meals">
     <tr>
-      <th>Meal</th>
+      <th onclick="getMeals()">Meal</th>
       <th>Price</th>
       <th><% %></th>
     </tr>
   <% @meals.each do |meal| if @meals %>
-    <tr>
-      <td><%= link_to meal.name, meal_path(meal) %></td>
-      <td><%= number_to_currency(meal.price) %></td>
+    <tr id="meals-list">
+      <!-- <td><%# link_to meal.name, meal_path(meal) %></td> -->
+      <!-- <td><%# number_to_currency(meal.price) %></td> -->
       <% if current_user && current_user.admin %>
       <td> <%= link_to "Delete", meal, method: :delete  %> | <%= link_to "Edit", edit_meal_path(meal)  %></td>
         <% end %>
