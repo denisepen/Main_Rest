@@ -20,7 +20,7 @@ class MealsController < ApplicationController
 
   def most_popular
     @meal = Meal.meal_count
-  end
+  end 
 
   def index
 
