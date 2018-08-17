@@ -8,16 +8,15 @@ function getuserOrders(){
         console.log(response)
         for (let i=0; i< response.length; i++){
           var meals = response[i]["meals"];
-
+          var date = new Date(response[i]["date"])
+          console.log("Date: " + date.toLocaleDateString())
           var orderTotal = meals.reduce(function (acc, meal){
-             // debugger
             return acc + parseFloat(meal["price"])}, 0);
-
 
           // arr.reduce(function (acc, obj) { return acc + obj.x; }, 0);
 
           orderList+="Order No.  " + response[i]["id"] + " | " +
-          "  Date:  " + response[i]["date"] + "<br>" +
+          "  Date:  " + date + "<br>" +
             "Meals:  <br>" +  meals.map(function(meal){
 
               return   `${meal["name"]}  $${meal["price"]} <br>`
@@ -25,7 +24,7 @@ function getuserOrders(){
 
                }
 
-               console.log(orderList)
+               // console.log(orderList)
                $("#orders").empty();
                $("#orders").html(orderList);
 
