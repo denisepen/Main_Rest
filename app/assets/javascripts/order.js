@@ -10,18 +10,20 @@ function getuserOrders(){
         for (let i=0; i< response.length; i++){
           var meals = response[i]["meals"];
           var date = new Date(response[i]["date"])
-          console.log("Date: " + date.toLocaleDateString())
+          // console.log("Date: " + date.toLocaleDateString())
           var orderTotal = meals.reduce(function (acc, meal){
-            return acc + parseFloat(meal["price"])}, 0);
+            if (!meal){ return parseFloat(0)} else {
+            return acc + parseFloat(meal["price"])}}, 0);
 
           // arr.reduce(function (acc, obj) { return acc + obj.x; }, 0);
 
           orderList+="Order No.  " + response[i]["id"] + " | " +
           "  Date:  " + date + "<br>" +
+
             "Meals:  <br>" +  meals.map(function(meal){
 
               return   `${meal["name"]}  $${meal["price"]} <br>`
-            })  + "<b>Order Total: </b>" + "$" + orderTotal.toFixed(2) +"<br><br>"
+              })  + "<b>Order Total: </b>" + "$" + orderTotal.toFixed(2) +"<br><br>"
 
                }
 
