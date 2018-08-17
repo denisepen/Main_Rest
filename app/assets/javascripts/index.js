@@ -1,8 +1,17 @@
 
 // When you click on a meal name the description and calorie count are displayed
-// $(document).ready(listeners);
+ // $(document).ready(listeners);
+// listeners();
+//  window.onload = listeners();
+
+// window.onload = function(){
+//         getuserOrders;
+//         listeners;
+//
+//  }
+
 function listeners(){
-  var meals = document.getElementsByClassName("descrip")
+  var meals = document.getElementsByClassName("descrip");
 
   for (i=0; i<meals.length; i++){
     meals[i].addEventListener("click", getDescription);
@@ -14,12 +23,12 @@ function getDescription(e){
   console.log(url)
   e.preventDefault();
   $.get(`${url}.json`, function(response){
-    console.log(response)
-    alert(response["description"] + "  Calorie Count: " + response["calorie_count"])
+    console.log(response["id"])
+    $(`td.mealDescription-${response["id"]}`).html(response["description"] + "<br>  Calorie Count: " + response["calorie_count"])
+    // alert(response["description"] + "  Calorie Count: " + response["calorie_count"])
   })
 }
 
-listeners();
 
 
 

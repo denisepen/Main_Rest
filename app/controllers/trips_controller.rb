@@ -30,8 +30,10 @@ class TripsController < ApplicationController
           format.json { render json: @trips}
         end
 
-   elsif current_user
-     @trips = current_user.trips
+   elsif
+     # while !current_user.trips.meals.empty?
+       @trips = current_user.trips
+    # end
      respond_to do |format|
        format.html { render :index }
        format.json { render json: @trips}
@@ -47,13 +49,13 @@ class TripsController < ApplicationController
     @trip = Trip.find(session[:trip_id])
     session[:total] = @trip.total
     respond_to do |format|
-      format.html { render :index }
+      format.html { render :show }
       format.json { render json: @trip}
     end
   else
     @trip = Trip.find_by(id: params[:id])
     respond_to do |format|
-      format.html { render :index }
+      format.html { render :show }
       format.json { render json: @trip}
     end
   end

@@ -1,11 +1,22 @@
 // plan: On the users show page, when "orders" is moused over or clicked the customers list of orders is rendered
 // $("document").ready(getuserOrders());
+
+// window.onload = function(){
+//         listeners;
+//         getuserOrders;
+//  }
 window.onload = getuserOrders;
+// window.onload = listeners;
+
+// $(document).ready(listeners)
+  // $(document).ready(getuserOrders)
+
 
 function getuserOrders(){
     var response;
       $.get("/trips.json", function(response){
         var orderList;
+
         console.log(response)
         for (let i=0; i< response.length; i++){
           var meals = response[i]["meals"];
@@ -18,17 +29,18 @@ function getuserOrders(){
           // arr.reduce(function (acc, obj) { return acc + obj.x; }, 0);
 
           orderList+="Order No.  " + response[i]["id"] + " | " +
-          "  Date:  " + date + "<br>" +
+            "  Date:  " + date + "<br>" +
 
             "Meals:  <br>" +  meals.map(function(meal){
 
               return   `${meal["name"]}  $${meal["price"]} <br>`
               })  + "<b>Order Total: </b>" + "$" + orderTotal.toFixed(2) +"<br><br>"
 
-               }
+          }
 
                // console.log(orderList)
                $("#orders").empty();
+               console.log($("#orders"))
                $("#orders").html(orderList);
 
 

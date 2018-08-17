@@ -16,9 +16,10 @@
     <th style="text-align: left;">Name</th>
     <th style="text-align: left;">Order Total</th>
   </tr>
+  <% if @trips %>
   <% @trips.each do |trip|%>
     <tr>
-      <% if trip.user%>
+      <% if trip.user %>
         <td><%=  trip.date.strftime("%m/%d/%y, %l:%M %p") %></td>
         <td><%=  trip.id %></td>
         <td><%= link_to trip.user.named, user_path(trip.user) %></td>
@@ -27,6 +28,7 @@
         <td><%= number_to_currency(@trip_total) %></td>
       <% end %>
     </tr>
+    <% end %>
   <% end %>
 
    <h2>Sum Total: <%= number_to_currency(@sum_of_totals) %></h2>
