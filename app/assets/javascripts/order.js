@@ -1,5 +1,6 @@
 // plan: On the users show page, when "orders" is moused over or clicked the customers list of orders is rendered
-
+// $("document").ready(getuserOrders());
+window.onload = getuserOrders;
 
 function getuserOrders(){
     var response;
