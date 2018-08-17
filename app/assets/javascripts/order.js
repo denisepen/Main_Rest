@@ -5,20 +5,29 @@ function getuserOrders(){
     var response;
       $.get("/trips.json", function(response){
         var orderList;
-
+        console.log(response)
         for (let i=0; i< response.length; i++){
-          
+          var meals = response[i]["meals"];
+
+          var orderTotal = meals.reduce(function (acc, meal){
+             // debugger
+            return acc + parseFloat(meal["price"])}, 0);
+
+
+          // arr.reduce(function (acc, obj) { return acc + obj.x; }, 0);
+
           orderList+="Order No.  " + response[i]["id"] + " | " +
           "  Date:  " + response[i]["date"] + "<br>" +
-            "Meals:  " +  response[i]["meals"].forEach(function(meal){
+            "Meals:  <br>" +  meals.map(function(meal){
 
-                 `Dish: ${meal["name"]}  Price: $${meal["price"]}`
-            }) + "<br>"
-                 // addmeal()
+              return   `${meal["name"]}  $${meal["price"]} <br>`
+            })  + "<b>Order Total: </b>" + "$" + orderTotal.toFixed(2) +"<br><br>"
+
                }
 
                console.log(orderList)
-               $("#orders").append(orderList);
+               $("#orders").empty();
+               $("#orders").html(orderList);
 
 
 
