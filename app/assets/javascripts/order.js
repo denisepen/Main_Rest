@@ -40,7 +40,6 @@ function getuserOrders(){
 
                // console.log(orderList)
                $("#orders").empty();
-               console.log($("#orders"))
                $("#orders").html(orderList);
 
 

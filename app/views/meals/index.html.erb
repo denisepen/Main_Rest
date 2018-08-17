@@ -23,13 +23,14 @@
     <tr id="meals-list">
       <td><%= link_to meal.name,  meal_path(meal), class: 'descrip' %></td>
        <td><%= number_to_currency(meal.price) %></td>
-       <td class = "mealDescription-<%= meal.id  %>"></td>
+       <td ></td>
       <% if current_user && current_user.admin %>
       <td> <%= link_to "Delete", meal, method: :delete  %> | <%= link_to "Edit", edit_meal_path(meal)  %></td>
 
         <% end %>
         <% end %>
     </tr>
+    <tr><td class= "mealDescription-<%= meal.id  %>"></td></tr>
 
   <% end %>
 </table>

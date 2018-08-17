@@ -10,6 +10,14 @@
 //
 //  }
 
+function start() {
+  getuserOrders();
+  listeners();
+}
+	window.onload = start;
+
+
+
 function listeners(){
   var meals = document.getElementsByClassName("descrip");
 
@@ -23,8 +31,8 @@ function getDescription(e){
   console.log(url)
   e.preventDefault();
   $.get(`${url}.json`, function(response){
-    console.log(response["id"])
-    $(`td.mealDescription-${response["id"]}`).html(response["description"] + "<br>  Calorie Count: " + response["calorie_count"])
+    
+    $(`td.mealDescription-${response["id"]}`).html(response["description"] + "<br>  Calorie Count: " + response["calorie_count"]).toggle()
     // alert(response["description"] + "  Calorie Count: " + response["calorie_count"])
   })
 }
