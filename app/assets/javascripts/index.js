@@ -36,6 +36,18 @@ function setNext(){
   })
 }
 
+function setPrevious(){
+  var prevId = parseInt($(".js-next").attr("data-id")) - 1;
+  $.get("/meals/" + prevId + ".json", function(data){
+    console.log(data["name"])
+     $("#mealName").html(data["name"]);
+     $("#mealDescription").html(data["description"]);
+     $("#mealPrice").html(data["price"]);
+     $("#mealCalories").html(data["calorie_count"]);
+     $(".js-next").attr("data-id", data["id"]);
+  })
+}
+
 // /////////////////////////////////////////////////////////////////////////
 // Code to display meal description & calorie count to menu when meal name is clicked
 function listeners(){

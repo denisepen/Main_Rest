@@ -1,6 +1,10 @@
   <div class="meal">
+  <div >
+    <a onclick="setPrevious()" style="font-size: 20px; color: red;" href="#" class="js-next" data-id="<%=@meal.id%>"><= Previous </a>
+    <a onclick="setNext()" style="font-size: 20px; color: red;" href="#" class="js-next" data-id="<%=@meal.id%>"> Next =></a>
+  </div>
 
-  <a onclick="setNext()" style="font-size: 20px; color: red;" href="#" class="js-next" data-id="<%=@meal.id%>"> Next =></a>
+
   <h1 id="mealName"><%= @meal.name %>  </h1>
 
 <h3 id="mealDescription"><%= @meal.description %>  </h3>
