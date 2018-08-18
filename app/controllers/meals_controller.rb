@@ -4,7 +4,7 @@ class MealsController < ApplicationController
     @meal = Meal.new
   end
 
-  def create
+  def create 
     @meal = Meal.new(meal_params)
     respond_to do |format|
       if @meal.save

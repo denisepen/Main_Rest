@@ -1,8 +1,9 @@
   <div class="meal">
 
-  <h1 id="mealName"><%= @meal.name %></h1>
+  <a style="font-size: 20px; color: red;" href="#" class="js-next" data-id="<%=@meal.id%>"> Next =></a>
+  <h1 id="mealName"><%= @meal.name %>  </h1>
 
-<h3 id="mealDescription"><%= @meal.description %></h3>
+<h3 id="mealDescription"><%= @meal.description %>  </h3>
 
 <h4 id="mealPrice"> Price: <%= number_to_currency(@meal.price) %>  </h4>
 <h4 id="mealCalories"> <%= @meal.calorie_count %> Calories </h4>
