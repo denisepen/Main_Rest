@@ -1,12 +1,13 @@
   <div class="meal">
 
-  <h1><%= @meal.name %></h1>
+  <h1 id="mealName"><%= @meal.name %></h1>
 
-<h3><%= @meal.description %></h3>
+<h3 id="mealDescription"><%= @meal.description %></h3>
 
-Price: <%= number_to_currency(@meal.price) %>  | <%= @meal.calorie_count %> Calories
+<h4 id="mealPrice"> Price: <%= number_to_currency(@meal.price) %>  </h4>
+<h4 id="mealCalories"> <%= @meal.calorie_count %> Calories </h4>
 
-<%= link_to "Edit", edit_meal_path(@meal) if current_user && is_admin?  %></td><br>
+<h4><%= link_to "Edit", edit_meal_path(@meal) if current_user && is_admin?  %></h4>
 
  <br>
 

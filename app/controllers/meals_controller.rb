@@ -10,7 +10,7 @@ class MealsController < ApplicationController
       if @meal.save
         session[:meal_id] = @meal.id
       # redirect_to meals_path
-          format.html { redirect_to meals_path }
+          format.html { redirect_to meal_path(@meal) }
           format.json  #{ render json: @meals}
     else
       render :new
@@ -20,7 +20,7 @@ class MealsController < ApplicationController
 
   def most_popular
     @meal = Meal.meal_count
-  end 
+  end
 
   def index
 
