@@ -9,14 +9,18 @@
 //         listeners;
 //
 //  }
-window.onload = start;
+// window.onload = start;
+// $(document).ready(function(){
+//   });
 
-function start() {
-  getuserOrders();
-  listeners();
-}
 
-function nextMeal(){
+// function start() {
+//   getuserOrders();
+//   listeners();
+// }
+////////////////////////////////////////////////////////////////////////////////////////
+// on meal show page - when the 'next' button is pressed, the next meal in the list is loaded
+ function nextMeal(){
   $(".js-next").on("click", setNext())
 }
 
@@ -24,10 +28,10 @@ function setNext(){
   var nextId = parseInt($(".js-next").attr("data-id")) + 1;
   $.get("/meals/" + nextId + ".json", function(data){
     console.log(data["name"])
-     $("#mealName").text(data["name"]);
-     $("#mealDescription").text(data["description"]);
-     $("#mealPrice").text(data["price"]);
-     $("#mealCalories").text(data["calorie_count"]);
+     $("#mealName").html(data["name"]);
+     $("#mealDescription").html(data["description"]);
+     $("#mealPrice").html(data["price"]);
+     $("#mealCalories").html(data["calorie_count"]);
      $(".js-next").attr("data-id", data["id"]);
   })
 }
@@ -70,5 +74,3 @@ function getMeals(){
            $("#meals-list").append(meals)
         });
       }
-
-    
