@@ -26,26 +26,41 @@
 
 function setNext(){
   var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+  $(".js-next").show();
+   if(nextId){
+
   $.get("/meals/" + nextId + ".json", function(data){
     console.log(data["name"])
      $("#mealName").html(data["name"]);
      $("#mealDescription").html(data["description"]);
-     $("#mealPrice").html(data["price"]);
+     $("#mealPrice").html("$" + parseInt(data["price"]).toFixed(2));
      $("#mealCalories").html(data["calorie_count"]);
      $(".js-next").attr("data-id", data["id"]);
+     $(".js-prev").attr("data-id", parseInt(data["id"]) - 1 );
   })
+} else {
+  $(".js-next").hide();
+}
 }
 
 function setPrevious(){
-  var prevId = parseInt($(".js-next").attr("data-id")) - 1;
+  var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
+   $(".js-prev").show();
+    console.log($(".js-prev").attr("data-id"));
+   if (prevId){
+
   $.get("/meals/" + prevId + ".json", function(data){
     console.log(data["name"])
      $("#mealName").html(data["name"]);
      $("#mealDescription").html(data["description"]);
-     $("#mealPrice").html(data["price"]);
+     $("#mealPrice").html("$" + parseInt(data["price"]).toFixed(2));
      $("#mealCalories").html(data["calorie_count"]);
-     $(".js-next").attr("data-id", data["id"]);
+     $(".js-prev").attr("data-id", data["id"]);
+     $(".js-next").attr("data-id", parseInt(data["id"]) + 1);
   })
+} else {
+  $(".js-prev").hide();
+}
 }
 
 // /////////////////////////////////////////////////////////////////////////
