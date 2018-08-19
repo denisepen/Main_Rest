@@ -108,11 +108,37 @@ function getDescription(e){
   // console.log(url)
   e.preventDefault();
   $.get(`${url}.json`, function(response){
-    var meal = response;
-    console.log(meal)
-    $(`td.mealDescription-${meal["id"]}`).empty();
-    $(`td.mealDescription-${meal["id"]}`).html(meal["description"] + "<br>  Calorie Count: " + meal["calorie_count"]).toggle();
-    // alert(response["description"] + "  Calorie Count: " + response["calorie_count"])
+    console.log(response)
+//////////////////////////////////////////////////////////////
+//  create Meal class => newMeal objects => set summary prototype on Meal class
+  function Meal(id, name, description, calorie_count, price, category) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.calorie_count = calorie_count;
+    this.price = price;
+    this.category = category;
+  }
+
+    var newMeal= new Meal(response["id"], response["name"], response["description"], response["calorie_count"], response["price"], response["category"] );
+    //  meal = {
+    //   id: response["id"],
+    //   name: response["name"],
+    //   description: response["description"],
+    //   calorie_count: response["calorie_count"],
+    //   price: response["price"],
+    //   category: response["category"]
+    // }
+
+    Meal.prototype.summary = function() {
+      return `<h4 style="font-size: 12px;" >` + this.description + "<br> <b>  Calories: </b>" + this.calorie_count + "<br> <b>Price: </b> $" + this.price + "</h4>";
+    };
+
+    console.log(newMeal)
+    $(`td.mealDescription-${newMeal["id"]}`).empty();
+    // $(`td.mealDescription-${meal["id"]}`).html(meal["description"] + "<br>  Calorie Count: " + meal["calorie_count"]).toggle();
+
+    $(`td.mealDescription-${newMeal["id"]}`).html(newMeal.summary()).toggle();
   })
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
