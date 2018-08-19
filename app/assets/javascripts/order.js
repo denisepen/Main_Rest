@@ -105,11 +105,13 @@ function listeners(){
 
 function getDescription(e){
   url = $(this).attr("href")
-  console.log(url)
+  // console.log(url)
   e.preventDefault();
   $.get(`${url}.json`, function(response){
-    $(`td.mealDescription-${response["id"]}`).empty();
-    $(`td.mealDescription-${response["id"]}`).html(response["description"] + "<br>  Calorie Count: " + response["calorie_count"]).toggle();
+    var meal = response;
+    console.log(meal)
+    $(`td.mealDescription-${meal["id"]}`).empty();
+    $(`td.mealDescription-${meal["id"]}`).html(meal["description"] + "<br>  Calorie Count: " + meal["calorie_count"]).toggle();
     // alert(response["description"] + "  Calorie Count: " + response["calorie_count"])
   })
 }
