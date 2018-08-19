@@ -1,4 +1,5 @@
-
+// //////////////
+// All this code has been moved to order.js
 
  // $(document).ready(listeners);
 // listeners();
