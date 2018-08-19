@@ -1,20 +1,29 @@
 
-// $("document").ready(getuserOrders());
 
-// window.onload = function(){
-//         listeners;
-//         getuserOrders;
-//  }
 window.onload = start;
-// window.onload = listeners;
 
-// $(document).ready(listeners)
-  // $(document).ready(getuserOrders)
 
   function start(){
+// Creating meal constructor
+    function Meal(id, name, description, calorie_count, price, category) {
+      this.id = id;
+      this.name = name;
+      this.description = description;
+      this.calorie_count = calorie_count;
+      this.price = price;
+      this.category = category;
+    }
+
+    Meal.prototype.summary = function() {
+      return `<h4 style="font-size: 12px;" >` + this.description + "<br> <b>  Calories: </b>" + this.calorie_count + "<br> <b>Price: </b> $" + parseInt(this.price).toFixed(2) + "</h4>";
+    };
+
+
+
     getuserOrders();
     listeners();
 // plan: On the users show page, when "orders" is moused over or clicked the customers list of orders is rendered
+
 function getuserOrders(){
     var response;
       $.get("/trips.json", function(response){
@@ -22,26 +31,37 @@ function getuserOrders(){
 
         console.log(response)
         for (let i=0; i< response.length; i++){
-          var meals = response[i]["meals"];
-          var date = new Date(response[i]["date"]).toLocaleDateString()
-          // console.log("Date: " + date.toLocaleDateString())
-          var orderTotal = meals.reduce(function (acc, meal){
-            if (!meal){ return parseFloat(0)} else {
-            return acc + parseFloat(meal["price"])}}, 0);
+
+          function Trip (id, date, meals){
+            this.id = id ;
+            this.date = date;
+            this.meals = meals;
+          };
+
+          var newTrip = new Trip(response[i]["id"], new Date(response[i]["date"]).toLocaleDateString(), response[i]["meals"])
+
+          // console.log(newTrip["date"])
+          // console.log(response[i]["meals"])
+
+          Trip.prototype.orderTotal = function(){
+            return this.meals.reduce(function (acc, meal){
+              if (!meal){ return parseFloat(0)} else {
+              return acc + parseFloat(meal["price"])}}, 0)
+          }
+
+          // console.log(newTrip.orderTotal());
+
+          Trip.prototype.mealList = function(){
+            return this.meals.map(function(meal){
+                return   `${meal["name"]}  $${meal["price"]} <br>`
+              }) }
 
           // arr.reduce(function (acc, obj) { return acc + obj.x; }, 0);
 
-          orderList+="Order No.  " + response[i]["id"] + " | " +
-            "  Date:  " + date + "<br>" +
-
-            "Meals:  <br>" +  meals.map(function(meal){
-
-              return   `${meal["name"]}  $${meal["price"]} <br>`
-              })  + "<b>Order Total: </b>" + "$" + orderTotal.toFixed(2) +"<br><br>"
+          orderList+= "<b>Order No. <b>" + newTrip["id"] + " |" + " <b> Date: <b>" + newTrip["date"] + "<br>" +
+          "Meals: <br>" + newTrip.mealList() + "<br>" + "<b>Order Total: <b>" + "$" + parseFloat(newTrip.orderTotal()).toFixed(2) + "<br><br> <hr><br>";
 
           }
-
-               // console.log(orderList)
                $("#orders").empty();
                $("#orders").html(orderList);
          }
@@ -60,13 +80,16 @@ function setNext(){
    if(nextId){
 
   $.get("/meals/" + nextId + ".json", function(data){
+
+    var newMeal= new Meal(data["id"], data["name"], data["description"], data["calorie_count"], data["price"], data["category"] );
+
     console.log(data["name"])
-     $("#mealName").html(data["name"]);
-     $("#mealDescription").html(data["description"]);
-     $("#mealPrice").html("$" + parseInt(data["price"]).toFixed(2));
-     $("#mealCalories").html(data["calorie_count"]);
-     $(".js-next").attr("data-id", data["id"]);
-     $(".js-prev").attr("data-id", parseInt(data["id"]) - 1 );
+     $("#mealName").html(newMeal["name"]);
+     $("#mealDescription").html(newMeal["description"]);
+     $("#mealPrice").html("$" + parseInt(newMeal["price"]).toFixed(2));
+     $("#mealCalories").html("Calories: " + newMeal["calorie_count"]);
+     $(".js-next").attr("data-id", newMeal["id"]);
+     $(".js-prev").attr("data-id", parseInt(newMeal["id"]) - 1 );
   })
 } else {
   $(".js-next").hide();
@@ -84,7 +107,7 @@ function setPrevious(){
      $("#mealName").html(data["name"]);
      $("#mealDescription").html(data["description"]);
      $("#mealPrice").html("$" + parseInt(data["price"]).toFixed(2));
-     $("#mealCalories").html(data["calorie_count"]);
+     $("#mealCalories").html("Calories: " + data["calorie_count"]);
      $(".js-prev").attr("data-id", data["id"]);
      $(".js-next").attr("data-id", parseInt(data["id"]) + 1);
   })
@@ -111,31 +134,22 @@ function getDescription(e){
     console.log(response)
 //////////////////////////////////////////////////////////////
 //  create Meal class => newMeal objects => set summary prototype on Meal class
-  function Meal(id, name, description, calorie_count, price, category) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.calorie_count = calorie_count;
-    this.price = price;
-    this.category = category;
-  }
+  // function Meal(id, name, description, calorie_count, price, category) {
+  //   this.id = id;
+  //   this.name = name;
+  //   this.description = description;
+  //   this.calorie_count = calorie_count;
+  //   this.price = price;
+  //   this.category = category;
+  // }
 
     var newMeal= new Meal(response["id"], response["name"], response["description"], response["calorie_count"], response["price"], response["category"] );
-    //  meal = {
-    //   id: response["id"],
-    //   name: response["name"],
-    //   description: response["description"],
-    //   calorie_count: response["calorie_count"],
-    //   price: response["price"],
-    //   category: response["category"]
-    // }
 
-    Meal.prototype.summary = function() {
-      return `<h4 style="font-size: 12px;" >` + this.description + "<br> <b>  Calories: </b>" + this.calorie_count + "<br> <b>Price: </b> $" + this.price + "</h4>";
-    };
 
-    console.log(newMeal)
-    $(`td.mealDescription-${newMeal["id"]}`).empty();
+
+
+    // console.log(newMeal)
+    // $(`td.mealDescription-${newMeal["id"]}`).empty();
     // $(`td.mealDescription-${meal["id"]}`).html(meal["description"] + "<br>  Calorie Count: " + meal["calorie_count"]).toggle();
 
     $(`td.mealDescription-${newMeal["id"]}`).html(newMeal.summary()).toggle();
