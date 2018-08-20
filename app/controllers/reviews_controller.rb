@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
       @review = @user.reviews.build(review_params)
       if @review.save
         respond_to do |format|
-          format.html { redirect_to reviews_path }
+          # format.html { redirect_to reviews_path }
           format.json { render json: @review, status: 201}
         end
 
@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
       @review = @user.reviews.build(review_params)
        if @review.save
          respond_to do |format|
-           format.html { redirect_to reviews_path }
+           # format.html { redirect_to reviews_path }
            format.json { render json: @review, status: 201}
          end
        else

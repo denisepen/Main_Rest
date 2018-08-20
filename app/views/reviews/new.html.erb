@@ -1,7 +1,14 @@
 
 
-<%= form_for @review do |f| %>
+<%= form_for @review, :html=> { class: 'form-review' } do |f|%>
 <p class="form-title">Write A Review</p>
 <%= render 'form', :f => f %>
 
 <% end %>
+
+<div id="reviewResult" style="text-align: center">
+  <h2 id="reviewTitle"></h2>
+  <p id="reviewComment"></p>
+  <p id="reviewDate"></p>
+  <p id="reviewUser"></p>
+</div>
