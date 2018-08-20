@@ -31,9 +31,8 @@ class TripsController < ApplicationController
         end
 
    elsif
-     # while !current_user.trips.meals.empty?
        @trips = current_user.trips
-    # end
+
      respond_to do |format|
        format.html { render :index }
        format.json { render json: @trips}

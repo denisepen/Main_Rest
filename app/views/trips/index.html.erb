@@ -18,16 +18,17 @@
   </tr>
   <% if @trips %>
   <% @trips.each do |trip|%>
-    <tr>
+    <tr data-id="<%=trip.id %>" class="userMeals">
       <% if trip.user %>
         <td><%=  trip.date.strftime("%m/%d/%y, %l:%M %p") %></td>
         <td><%=  trip.id %></td>
-        <td><%= link_to trip.user.named, user_path(trip.user) %></td>
+        <td ><%= link_to trip.user.named, user_path(trip.user) %></td>
         <%  @trip_total = trip.total %>
         <% @sum_of_totals+= @trip_total %>
         <td><%= number_to_currency(@trip_total) %></td>
       <% end %>
     </tr>
+    <tr><td id= "mealDescription-<%= trip.id  %>" ></td></tr>
     <% end %>
   <% end %>
 

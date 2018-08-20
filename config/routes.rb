@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   root :to => "application#home"
 
+  # get 'current_user' => "users#current_user"
+
    resources :users, only: [:new, :show] do
     # nested resource for trips
      resources :trips, only: [:show, :index]

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  
+
   def index
     if  is_admin? || !current_user
       @users = User.all

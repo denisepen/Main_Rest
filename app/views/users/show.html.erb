@@ -4,9 +4,13 @@
 
 <h3>Email: <%= @user.email %> <%= link_to "| Edit Account", edit_user_path(@user) if @user == current_user %></h3><br>
 
+
 <h4 id ="userOrders" >Orders:</h4>
 
 <div id="orders"></div>
+
+
+
 
 <!-- All removed for jquery project -->
 <%# @user.trips.each do |trip| if !trip.meals.empty? %>
