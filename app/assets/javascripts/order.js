@@ -167,14 +167,12 @@ function getMeals(e){
     console.log(response);
     var list = ""
 
-    // for (let i=0; i< response.length; i++){
 
 //   create TripMeal constructor
       function TripMeal (id, date, meals){
         this.id = id ;
         this.date = date;
         this.meals = meals;
-        // this.userId = userId;
       };
 //    create tripMeal objects
       var tripMeal = new TripMeal(response["id"], new Date(response["date"]).toLocaleDateString(), response["meals"]);
@@ -185,18 +183,19 @@ function getMeals(e){
   TripMeal.prototype.mealList = function(){
     if (this.meals){
     return this.meals.map(function(meal){
-        return   `<p style="font-size: 10px;">${meal["name"]}  $${meal["price"]}</p> <br>`
+        return   `<p style="font-size: 11px;">${meal["name"]}  $${parseFloat(meal["price"]).toFixed(2)}</p> <br>`
       }) }
     }
 
     list = tripMeal.mealList()
     console.log(list)
   // }
-  $(`td#mealDescription-${tripMeal["id"]}`).html(tripMeal.mealList())
-  console.log($(`td#mealDescription-${tripMeal["id"]}`));
+  $(`td#mealDescription-${tripMeal["id"]}`).html(tripMeal.mealList()).toggle();
+  // console.log($(`td#mealDescription-${tripMeal["id"]}`));
+// })
+
+
 })
-
-
-    }
-
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 }
