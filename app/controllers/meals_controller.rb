@@ -71,7 +71,7 @@ class MealsController < ApplicationController
     @meal = Meal.find(params[:id])
     @meal.update(meal_params)
     respond_to do |format|
-      format.html { redirect_to meal_path(@meal) }
+      format.html { redirect_to meals_path }
       format.json { render json: @meal}
     end
 

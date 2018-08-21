@@ -10,6 +10,8 @@ function start(){
   custOrders();
   reviewForm();
   mealForm();
+  nextMeal();
+  prevMeal();
 
 // Creating meal constructor
     function Meal(id, name, description, calorie_count, price, category) {
@@ -26,6 +28,11 @@ function start(){
       };
 
     var add = `<a href="/orders/new" style = "color: red; font-size: 13px"> ADD </a>`
+
+    // to display newly created meal info on the new meal form page
+    Meal.prototype.newMealRep = function() {
+      return "<br><h2><b>" + this.name + "</b></h2><br>" + `<h4><b>` + this.description + "</b><br> <b>  Calories: </b>" + this.calorie_count + "<br> <b>Price: </b> $" + parseInt(this.price).toFixed(2) + "<br><b>Category: </b>" + this.category + "</h4>";
+      };
 ///////////////////////////////////////////////////////////////////////////////////////
 
 //   create Trip constructor
@@ -90,41 +97,62 @@ function getuserOrders(){
 ///////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////
-// on meal show page - when the 'next' button is pressed, the next meal in the list is loaded
+// on meals show page - when the 'next' button is pressed, the next meal in the list is loaded
  function nextMeal(){
-  $(".js-next").on("click", setNext())
+  $(".js-next").click(setNext)
+}
+
+function prevMeal(){
+ $(".js-prev").click(setPrevious)
 }
 
 function setNext(){
-  var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-  $(".js-next").show();
-   if(nextId){
 
-    $.get("/meals/" + nextId + ".json", function(data){
+  var mealsArrayLength;
 
+   $.get("/meals.json", function(response){
+
+      mealsArrayLength = response.length
+    // debugger
+
+  console.log("Meals Arr Length: " + mealsArrayLength);
+  var nextId = parseInt($(".js-next").attr("data-id")) +1 ;
+  // console.log("a.js-prev");
+  // $(".js-next").show();
+  $("a.js-prev").show();
+    if(nextId  <= mealsArrayLength){
+
+    $.get(`/meals/${nextId}.json`, function(data){
+      // debugger
     var newMeal= new Meal(data["id"], data["name"], data["description"], data["calorie_count"], data["price"], data["category"] );
 
-    console.log(data["name"])
+    console.log(data["name"] + data["id"])
+    console.log(nextId);
      $("#mealName").html(newMeal["name"]);
      $("#mealDescription").html(newMeal["description"]);
      $("#mealPrice").html("$" + parseInt(newMeal["price"]).toFixed(2));
      $("#mealCalories").html("Calories: " + newMeal["calorie_count"]);
-     $(".js-next").attr("data-id", newMeal["id"]);
+     $(".js-next").attr("data-id", parseInt(newMeal["id"])) ;
      $(".js-prev").attr("data-id", parseInt(newMeal["id"]) - 1 );
-  })
-  if ($(".js-prev").attr("style").includes("display: none")){
-    $(".js-prev").show();
-  }
+    })
+  // if ($(".js-prev").attr("style").includes("display: none")){
+  //   // $(".js-prev").show();
+  //   $(".js-prev").attr("style", "display: inline-block").show();
+  // }
+      }
+else {
+  $(".js-next").hide();
+
 }
-// else {
-//   $(".js-next").hide();
-// }
+  });
 }
 
 function setPrevious(){
-  var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
-   $(".js-prev").show();
+
+  var prevId = parseInt($(".js-prev").attr("data-id"));
+   // $(".js-prev").show();
     // console.log($(".js-prev").attr("data-id"));
+    $(".js-next").show();
    if (prevId){
 
     $.get("/meals/" + prevId + ".json", function(data){
@@ -135,8 +163,8 @@ function setPrevious(){
        $("#mealDescription").html(newMeal["description"]);
        $("#mealPrice").html("$" + parseInt(newMeal["price"]).toFixed(2));
        $("#mealCalories").html("Calories: " + newMeal["calorie_count"]);
-       $(".js-prev").attr("data-id", newMeal["id"]);
-       $(".js-next").attr("data-id", parseInt(newMeal["id"]) + 1);
+       $(".js-prev").attr("data-id", newMeal["id"] -1);
+       $(".js-next").attr("data-id", parseInt(newMeal["id"]) );
   })
 }
 else {
@@ -252,9 +280,7 @@ function reviewForm(){
 
         var newMeal= new Meal(response["id"], response["name"], response["description"], response["calorie_count"], response["price"], response["category"] );
 
-        Meal.prototype.newMealRep = function() {
-          return "<br><h2><b>" + this.name + "</b></h2><br>" + `<h4><b>` + this.description + "</b><br> <b>  Calories: </b>" + this.calorie_count + "<br> <b>Price: </b> $" + parseInt(this.price).toFixed(2) + "<br><b>Category: </b>" + this.category + "</h4>";
-          };
+
 
 
           $("#mealResult").html(newMeal.newMealRep())
@@ -264,5 +290,5 @@ function reviewForm(){
 
     });
   }
-
+///////////////////////////////////////////////
 }
