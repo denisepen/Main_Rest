@@ -5,6 +5,11 @@ window.onload = start;
 
 function start(){
 
+  // getuserOrders();
+  listeners();
+  custOrders();
+  form();
+
 // Creating meal constructor
     function Meal(id, name, description, calorie_count, price, category) {
       this.id = id;
@@ -20,12 +25,45 @@ function start(){
       };
 
     var add = `<a href="/orders/new" style = "color: red; font-size: 13px"> ADD </a>`
+///////////////////////////////////////////////////////////////////////////////////////
 
-    // getuserOrders();
-    listeners();
-    custOrders();
-    form();
-// plan: On the users show page, when the 'orders' is clicked the customers list of orders is displayed
+//   create Trip constructor
+          function Trip (id, date, meals){
+            this.id = id ;
+            this.date = date;
+            this.meals = meals;
+          };
+
+ // calculate the newTrip's order total
+          Trip.prototype.orderTotal = function(){
+            if (this.meals){
+            return this.meals.reduce(function (acc, meal){
+              if (!meal){ return parseFloat(0)} else {
+              return acc + parseFloat(meal["price"])}}, 0)
+          }
+        }
+
+        // arr.reduce(function (acc, obj) { return acc + obj.x; }, 0); //
+
+//  create the list of meals for each trip
+          Trip.prototype.mealList = function(){
+            if (this.meals){
+            return this.meals.map(function(meal){
+                return   `${meal["name"]}  $${meal["price"]} <br>`
+              })
+            }
+          }
+
+// create the list of meals for each trip on the admin page for each customer order
+          Trip.prototype.mealList2 = function(){
+            if (this.meals){
+            return this.meals.map(function(meal){
+                return   `<p style="font-size: 11px;">${meal["name"]}  $${parseFloat(meal["price"]).toFixed(2)}</p> <br>`
+              }) }
+            }
+////////////////////////////////////////////////////////////////////////////////////
+
+// plan: On the users show page, when 'orders' is clicked the customers list of orders is displayed
   $("#userOrders").click(getuserOrders);
 
 function getuserOrders(){
@@ -37,40 +75,15 @@ function getuserOrders(){
         // console.log(response[i]["user"]["id"]);
         for (let i=0; i< response.length; i++){
           // debugger
-//   create Trip constructor
-          function Trip (id, date, meals){
-            this.id = id ;
-            this.date = date;
-            this.meals = meals;
-          };
+
 //    create newTrip objects
           var newTrip = new Trip(response[i]["id"], new Date(response[i]["date"]).toLocaleDateString(), response[i]["meals"])
 
- // calculate the newTrip's order total
-          Trip.prototype.orderTotal = function(){
-            if (this.meals){
-            return this.meals.reduce(function (acc, meal){
-              if (!meal){ return parseFloat(0)} else {
-              return acc + parseFloat(meal["price"])}}, 0)
-          }
-        }
-
-//  create the list of meals for each trip
-          Trip.prototype.mealList = function(){
-            if (this.meals){
-            return this.meals.map(function(meal){
-                return   `${meal["name"]}  $${meal["price"]} <br>`
-              })
-            }
-          }
-
-          // arr.reduce(function (acc, obj) { return acc + obj.x; }, 0);
-
-            orderList+= "<b>Order No. <b>" + newTrip["id"] + " |" + " <b> Date: <b>" + newTrip["date"] + "<br>" +
-            "Meals: <br>" + newTrip.mealList() + "<br>" + "<b>Order Total: <b>" + "$" + parseFloat(newTrip.orderTotal()).toFixed(2) + "<br><br> <hr><br>";
+          orderList+= "<b>Order No. <b>" + newTrip["id"] + " |" + " <b> Date: <b>" + newTrip["date"] + "<br>" +
+          "Meals: <br>" + newTrip.mealList() + "<br>" + "<b>Order Total: <b>" + "$" + parseFloat(newTrip.orderTotal()).toFixed(2) + "<br><br> <hr><br>";
       }
                // $("#orders").empty();
-               $("#orders").html(orderList).toggle();
+          $("#orders").html(orderList).toggle();
     }
 )};
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -99,27 +112,30 @@ function setNext(){
      $(".js-prev").attr("data-id", parseInt(newMeal["id"]) - 1 );
   })
   if ($(".js-prev").attr("style").includes("display: none")){
-    $(".js-prev").show()
+    $(".js-prev").show();
   }
-} else {
-  $(".js-next").hide();
 }
+// else {
+//   $(".js-next").hide();
+// }
 }
 
 function setPrevious(){
   var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
    $(".js-prev").show();
-    console.log($(".js-prev").attr("data-id"));
+    // console.log($(".js-prev").attr("data-id"));
    if (prevId){
 
     $.get("/meals/" + prevId + ".json", function(data){
-      console.log(data["name"])
-       $("#mealName").html(data["name"]);
-       $("#mealDescription").html(data["description"]);
-       $("#mealPrice").html("$" + parseInt(data["price"]).toFixed(2));
-       $("#mealCalories").html("Calories: " + data["calorie_count"]);
-       $(".js-prev").attr("data-id", data["id"]);
-       $(".js-next").attr("data-id", parseInt(data["id"]) + 1);
+
+      var newMeal= new Meal(data["id"], data["name"], data["description"], data["calorie_count"], data["price"], data["category"] );
+      // console.log(data["name"])
+       $("#mealName").html(newMeal["name"]);
+       $("#mealDescription").html(newMeal["description"]);
+       $("#mealPrice").html("$" + parseInt(newMeal["price"]).toFixed(2));
+       $("#mealCalories").html("Calories: " + newMeal["calorie_count"]);
+       $(".js-prev").attr("data-id", newMeal["id"]);
+       $(".js-next").attr("data-id", parseInt(newMeal["id"]) + 1);
   })
 }
 else {
@@ -170,29 +186,14 @@ function getMeals(e){
     // console.log(response);
     var list = ""
 
-//   create TripMeal constructor
-      function TripMeal (id, date, meals){
-        this.id = id ;
-        this.date = date;
-        this.meals = meals;
-      };
 //    create tripMeal objects
-      var tripMeal = new TripMeal(response["id"], new Date(response["date"]).toLocaleDateString(), response["meals"]);
+      var tripMeal = new Trip(response["id"], new Date(response["date"]).toLocaleDateString(), response["meals"]);
 
       // console.log("Hello!" + response["id"])
-
-
-  TripMeal.prototype.mealList = function(){
-    if (this.meals){
-    return this.meals.map(function(meal){
-        return   `<p style="font-size: 11px;">${meal["name"]}  $${parseFloat(meal["price"]).toFixed(2)}</p> <br>`
-      }) }
-    }
-
-    list = tripMeal.mealList()
+    list = tripMeal.mealList2()
     // console.log(list)
   // }
-  $(`td#mealDescription-${tripMeal["id"]}`).html(tripMeal.mealList()).toggle();
+  $(`td#mealDescription-${tripMeal["id"]}`).html(tripMeal.mealList2()).toggle();
   // console.log($(`td#mealDescription-${tripMeal["id"]}`));
 // })
 
