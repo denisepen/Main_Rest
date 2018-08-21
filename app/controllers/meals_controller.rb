@@ -4,17 +4,20 @@ class MealsController < ApplicationController
     @meal = Meal.new
   end
 
-  def create 
+  def create
     @meal = Meal.new(meal_params)
-    respond_to do |format|
+
       if @meal.save
         session[:meal_id] = @meal.id
+        respond_to do |format|
+
       # redirect_to meals_path
-          format.html { redirect_to meal_path(@meal) }
-          format.json  #{ render json: @meals}
+          # format.html { redirect_to meal_path(@meal) }
+        format.json  { render json: @meal, status: 201} #{ render json: @meals}
+      end
     else
       render :new
-      end
+
     end
   end
 

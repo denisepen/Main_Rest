@@ -8,7 +8,8 @@ function start(){
   // getuserOrders();
   listeners();
   custOrders();
-  form();
+  reviewForm();
+  mealForm();
 
 // Creating meal constructor
     function Meal(id, name, description, calorie_count, price, category) {
@@ -204,7 +205,7 @@ function getMeals(e){
 ////////////////////////////////////////////////////////////////////////////////////////
 // Review form - when submitted append the data to the review form page
 
-function form(){
+function reviewForm(){
   $('form.form-review').submit(function(e) {
     e.preventDefault();
     var values = $(this).serialize();
@@ -214,7 +215,7 @@ function form(){
 
     reviewPosting.done(function(data) {
       // var review = data;
-
+      console.log(data)
       function Review(id, title, comment, datePosted, userEmail) {
         this.title = title;
         this.comment = comment;
@@ -224,8 +225,6 @@ function form(){
 
     var review = new Review(data["id"], data["title"], data["comment"], new Date(data["date_posted"]).toLocaleDateString(), data["user"]["email"])
 
-        console.log(review);
-        // console.log(review["comment"]);
         $("#reviewTitle").text(review["title"]);
         $("#reviewComment").text(review["comment"]);
         $("#reviewDate").text("Date: " + review["datePosted"]);
@@ -233,11 +232,37 @@ function form(){
 
         $('form.form-review')[0].reset
 
-        return false;
-
-
-
       });
     })
   }
+
+  // To display newly created meal on the new meal form
+  function mealForm(){
+    $('form.form-meal').submit(function(e) {
+      e.preventDefault();
+      var values = $(this).serialize();
+      console.log(values);
+
+
+        var mealPosting = $.post('/meals', values);
+       console.log(mealPosting)
+
+      mealPosting.done(function(response){
+        console.log(response)
+
+        var newMeal= new Meal(response["id"], response["name"], response["description"], response["calorie_count"], response["price"], response["category"] );
+
+        Meal.prototype.newMealRep = function() {
+          return "<br><h2><b>" + this.name + "</b></h2><br>" + `<h4><b>` + this.description + "</b><br> <b>  Calories: </b>" + this.calorie_count + "<br> <b>Price: </b> $" + parseInt(this.price).toFixed(2) + "<br><b>Category: </b>" + this.category + "</h4>";
+          };
+
+
+          $("#mealResult").html(newMeal.newMealRep())
+
+          $('form.form-meal')[0].reset
+      });
+
+    });
+  }
+
 }
