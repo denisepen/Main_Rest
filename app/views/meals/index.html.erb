@@ -25,7 +25,7 @@
        <td><%= number_to_currency(meal.price) %></td>
        <td ></td>
       <% if current_user && current_user.admin %>
-      <td> <%= link_to "Delete", meal, method: :delete  %> | <%= link_to "Edit", edit_meal_path(meal)  %></td>
+      <td> <%= link_to "Delete", meal, method: :delete  %> | <%= link_to "Edit", edit_meal_path(meal)  %>  |  <%= link_to "Show", meal_path(meal)  %></td>
 
         <% end %>
         <% end %>
