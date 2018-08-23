@@ -55,19 +55,23 @@ function start(){
 
 //  create the list of meals for each trip
           Trip.prototype.mealList = function(){
+            var list = "";
             if (this.meals){
-            return this.meals.map(function(meal){
-                return   `${meal["name"]}  $${meal["price"]} <br>`
+             this.meals.forEach(function(meal){
+                list+=   `${meal["name"]}  $${parseFloat(meal["price"]).toFixed(2)} <br>`
               })
             }
+            return list;
           }
 
 // create the list of meals for each trip on the admin page for each customer order
           Trip.prototype.mealList2 = function(){
+            var list = "";
             if (this.meals){
-            return this.meals.map(function(meal){
-                return   `<p style="font-size: 11px;">${meal["name"]}  $${parseFloat(meal["price"]).toFixed(2)}</p> <br>`
+              this.meals.forEach(function(meal){
+                list+=  `<p style="font-size: 11px;">${meal["name"]}  $${parseFloat(meal["price"]).toFixed(2)}</p> <br>`
               }) }
+              return list;
             }
 ////////////////////////////////////////////////////////////////////////////////////
 
