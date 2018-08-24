@@ -24,7 +24,7 @@ class TripsController < ApplicationController
           @trips = Trip.past_hour
         else
           @trips = Trip.all
-        end
+        end 
         respond_to do |format|
           format.html { render :index }
           format.json { render json: @trips}

@@ -37,11 +37,13 @@ class SessionsController < ApplicationController
     # session[:trip_id] = nil
     session[:total] = 0
     @trip = Trip.find_by(id: session[:trip_id])
-    
-    if @trip.status = "new"
-      @trip.delete
+
+    if @trip
+      if @trip.status = "new"
+        @trip.delete
+      end
+      redirect_to root_path
     end
-    redirect_to root_path
   end
 
   private
