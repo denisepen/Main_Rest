@@ -80,24 +80,44 @@ function start(){
 
 function getuserOrders(){
 
-      $.get("/trips.json", function(response){
+      $.get("/trips.json", function(responses){
         var orderList="";
 
         // console.log(response)
         // console.log(response[i]["user"]["id"]);
-        for (let i=0; i< response.length; i++){
+        // for (let i=0; i< response.length; i++){
           // debugger
+            let tripsArray = responses.map(function(response){
+             newTrip = new Trip(response["id"], new Date(response["date"]).toLocaleDateString(), response["meals"])
+             newTrip.total = newTrip.orderTotal();
+             return newTrip
+             // console.log(newTrip)
+          })
 
-//    create newTrip objects
-          var newTrip = new Trip(response[i]["id"], new Date(response[i]["date"]).toLocaleDateString(), response[i]["meals"])
+            // let tripTotal = newTrip.orderTotal();
 
-          orderList+= "<b>Order No. <b>" + newTrip["id"] + " |" + " <b> Date: <b>" + newTrip["date"] + "<br>" +
-          "Meals: <br>" + newTrip.mealList() + "<br>" + "<b>Order Total: <b>" + "$" + parseFloat(newTrip.orderTotal()).toFixed(2) + "<br><br> <hr><br>";
-      }
-               // $("#orders").empty();
-          $("#orders").html(orderList).toggle();
-    }
-)};
+             // console.log("Trips Array" , tripsArray);
+            //
+            // tripsArray.forEach(function(trip){
+            //   tripTotal = trip.orderTotal();
+            //   console.log(trip + tripTotal)
+            // })
+
+          tripsArray.sort(function(a, b){
+              return a.total - b.total
+            })
+          //
+           // console.log("final", finalArray)
+           tripsArray.forEach(function(trip){
+             orderList+= "<b>Order No. <b>" + trip["id"] + " |" + " <b> Date: <b>" + trip["date"] + "<br>" +
+               "Meals: <br>" + trip.mealList() + "<br>" + "<b>Order Total: <b>" + "$" + parseFloat(trip.total).toFixed(2) + "<br><br> <hr><br>";})
+
+               $("#orders").empty();
+             $("#orders").html(orderList).toggle();
+
+          //
+    })}
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -119,36 +139,36 @@ function setNext(){
       mealsArrayLength = response.length
     // debugger
 
-  console.log("Meals Arr Length: " + mealsArrayLength);
-  var nextId = parseInt($(".js-next").attr("data-id")) +1 ;
-  // console.log("a.js-prev");
-  // $(".js-next").show();
-  $("a.js-prev").show();
-    if(nextId  <= mealsArrayLength){
+    console.log("Meals Arr Length: " + mealsArrayLength);
+    var nextId = parseInt($(".js-next").attr("data-id")) +1 ;
+    // console.log("a.js-prev");
+    // $(".js-next").show();
+    $("a.js-prev").show();
+      if(nextId  <= mealsArrayLength){
 
-    $.get(`/meals/${nextId}.json`, function(data){
-      // debugger
-    var newMeal= new Meal(data["id"], data["name"], data["description"], data["calorie_count"], data["price"], data["category"] );
+      $.get(`/meals/${nextId}.json`, function(data){
+        // debugger
+      var newMeal= new Meal(data["id"], data["name"], data["description"], data["calorie_count"], data["price"], data["category"] );
 
-    console.log(data["name"] + data["id"])
-    console.log(nextId);
-     $("#mealName").html(newMeal["name"]);
-     $("#mealDescription").html(newMeal["description"]);
-     $("#mealPrice").html("$" + parseInt(newMeal["price"]).toFixed(2));
-     $("#mealCalories").html("Calories: " + newMeal["calorie_count"]);
-     $(".js-next").attr("data-id", parseInt(newMeal["id"])) ;
-     $(".js-prev").attr("data-id", parseInt(newMeal["id"]) - 1 );
-    })
+      console.log(data["name"] + data["id"])
+      console.log(nextId);
+       $("#mealName").html(newMeal["name"]);
+       $("#mealDescription").html(newMeal["description"]);
+       $("#mealPrice").html("$" + parseInt(newMeal["price"]).toFixed(2));
+       $("#mealCalories").html("Calories: " + newMeal["calorie_count"]);
+       $(".js-next").attr("data-id", parseInt(newMeal["id"])) ;
+       $(".js-prev").attr("data-id", parseInt(newMeal["id"]) - 1 );
+      })
   // if ($(".js-prev").attr("style").includes("display: none")){
   //   // $(".js-prev").show();
   //   $(".js-prev").attr("style", "display: inline-block").show();
   // }
       }
-else {
-  $(".js-next").hide();
+  else {
+    $(".js-next").hide();
 
-}
-  });
+  }
+    });
 }
 
 function setPrevious(){
@@ -169,12 +189,12 @@ function setPrevious(){
        $("#mealCalories").html("Calories: " + newMeal["calorie_count"]);
        $(".js-prev").attr("data-id", newMeal["id"] -1);
        $(".js-next").attr("data-id", parseInt(newMeal["id"]) );
-  })
-}
-else {
-  $(".js-prev").hide();
-}
-}
+     })
+    }
+    else {
+      $(".js-prev").hide();
+    }
+  }
 
 // /////////////////////////////////////////////////////////////////////////
 // Code to display meal description & calorie count to menu when meal name is clicked
@@ -255,7 +275,7 @@ function reviewForm(){
         this.userEmail = userEmail;
       }
 
-    var review = new Review(data["id"], data["title"], data["comment"], new Date(data["date_posted"]).toLocaleDateString(), data["user"]["email"])
+      var review = new Review(data["id"], data["title"], data["comment"], new Date(data["date_posted"]).toLocaleDateString(), data["user"]["email"])
 
         $("#reviewTitle").text(review["title"]);
         $("#reviewComment").text(review["comment"]);
@@ -279,7 +299,7 @@ function reviewForm(){
         var mealPosting = $.post('/meals', values);
        console.log(mealPosting)
 
-      mealPosting.done(function(response){
+       mealPosting.done(function(response){
         console.log(response)
 
         var newMeal= new Meal(response["id"], response["name"], response["description"], response["calorie_count"], response["price"], response["category"] );
