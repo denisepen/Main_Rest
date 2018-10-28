@@ -9,7 +9,7 @@ User.delete_all
 
 User.create!(first_name:  "Denise",
               last_name:  "Owner",
-             email: "denise@thebestrestaurant.org",
+             email: "owner@restaurant.com",
              password:              "foobar",
              password_confirmation: "foobar",
              admin: true)
