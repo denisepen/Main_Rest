@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
 
   def signin
     @user = User.new
+    
   end
 
   def create
@@ -37,7 +38,7 @@ class SessionsController < ApplicationController
     # session[:trip_id] = nil
     session[:total] = 0
     @trip = Trip.find_by(id: session[:trip_id])
-    
+
     if @trip.status = "new"
       @trip.delete
     end
