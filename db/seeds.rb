@@ -9,7 +9,7 @@ User.delete_all
 
 User.create!(first_name:  "Denise",
               last_name:  "Owner",
-             email: "denise@thebestrestaurant.org",
+             email: "owner@restaurant.com",
              password:              "foobar",
              password_confirmation: "foobar",
              admin: true)
@@ -26,7 +26,28 @@ User.create!(first_name:  "Denise",
                password_confirmation: password)
 end
 
+# :title, :comment, :date_posted, :user_id
 
+Review.create(
+  title: "Love This Place",
+  comment: "I love to bring the family here",
+  date_posted: DateTime.new(2018,2,3),
+  user_id: 2
+)
+
+Review.create(
+  title: "Service a Little Slow",
+  comment: "Foods great but service is slow",
+  date_posted: DateTime.new(2018,4,8),
+  user_id: 3
+)
+
+Review.create(
+  title: "Alot of Variety",
+  comment: "From burgers to trout, this place has it all",
+  date_posted: DateTime.new(2018,9,21),
+  user_id: 5
+)
 
 Meal.create(
   name: "Cheese Burger",
