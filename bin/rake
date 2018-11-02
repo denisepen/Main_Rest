@@ -6,5 +6,5 @@ rescue LoadError => e
 end
 require_relative '../config/boot'
 require 'rake'
-require 'omniauth'
+# require 'omniauth'
 Rake.application.run
