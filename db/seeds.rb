@@ -32,7 +32,7 @@ Review.create(
   title: "Love This Place",
   comment: "I love to bring the family here",
   date_posted: DateTime.new(2018,2,3),
-  user_id: 2
+  user_id: 6
 )
 
 Review.create(
