@@ -7,6 +7,7 @@ gem 'omniauth'
 gem 'dotenv-rails'
 gem 'pry'
 gem 'active_model_serializers', '0.10.6'
+gem 'omniauth-facebook'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
