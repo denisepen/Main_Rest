@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_155334) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "uid"
+    t.bigint "uid"
     t.string "name"
     t.string "image"
     t.string "first_name"

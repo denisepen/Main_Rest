@@ -4,6 +4,7 @@ require 'rails/all'
 require "active_model_serializers"
 require 'omniauth-facebook'
 require 'dotenv/load'
+require 'faker'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
