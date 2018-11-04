@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
 
   def create
     # @review = Review.new(review_params)
-    if !params[:user_id] || !logged_in? 
+    if !params[:user_id] || !logged_in?
       flash[:alert] = "Must be signed in to create review"
       redirect_to root_path
     elsif is_admin?
@@ -79,6 +79,7 @@ end
 
   def index
     # binding.pry
+    # puts  ENV['FACEBOOK_SECRET'] + 111
 
     if params[:user_id]
       @reviews = User.find(params[:user_id]).reviews

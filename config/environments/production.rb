@@ -3,6 +3,8 @@ Rails.application.configure do
 
 require 'omniauth-facebook'
 require 'faker'
+require 'dotenv'
+Dotenv.load
   # Code is not reloaded between requests.
   config.cache_classes = true
 
