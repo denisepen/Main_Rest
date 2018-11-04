@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :meals
   resources :orders, only: [:new, :destroy]
 
-  get '/auth/facebook/callback' => 'sessions#create'
+  get '/auth/facebook/callback/' => 'sessions#create'
 
   get '/most_popular', to: 'meals#most_popular'
 
