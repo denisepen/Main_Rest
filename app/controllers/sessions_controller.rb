@@ -31,6 +31,10 @@ class SessionsController < ApplicationController
 
  end
 
+ def failure
+
+ end
+
 
   def destroy
     session[:user_id] = nil

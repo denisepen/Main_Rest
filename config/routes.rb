@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get '/auth/facebook/callback' => 'sessions#create'
 
+  get '/auth/failure' => 'sessions#failure'
+
   get '/most_popular', to: 'meals#most_popular'
 
   get '/signin', to: 'sessions#signin'
