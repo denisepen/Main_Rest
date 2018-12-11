@@ -21,9 +21,9 @@ class MealsController < ApplicationController
     end
   end
 
-  def most_popular
-    @meal = Meal.meal_count
-  end
+  # def most_popular
+  #   @meal = Meal.meal_count
+  # end
 
   def index
 
